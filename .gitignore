@@ -59,9 +59,6 @@ lerna-debug.log*
 *.swo
 *~
 
-# Docker
-.dockerignore
-
 # OS
 .DS_Store
 *.log
