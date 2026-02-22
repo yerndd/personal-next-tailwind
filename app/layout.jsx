@@ -11,7 +11,6 @@ export const metadata = {
 	authors: [{ name: 'Rindho Ananta Samat' }],
 	creator: 'Rindho Ananta Samat',
 	publisher: 'Rindho Ananta Samat',
-	metadataBase: new URL('https://github.com/yerndd/personal-next-tailwind'),
 	alternates: {
 		canonical: '/',
 	},
@@ -33,7 +32,6 @@ export const metadata = {
 	openGraph: {
 		type: 'website',
 		locale: 'en_US',
-		url: '/',
 		title: 'Rindho Ananta Samat | Portfolio',
 		description: 'Personal portfolio website showcasing projects, skills, and professional experience',
 		siteName: 'Rindho Ananta Samat Portfolio',
@@ -63,9 +61,6 @@ export const metadata = {
 			'max-image-preview': 'large',
 			'max-snippet': -1,
 		},
-	},
-	verification: {
-		google: 'your-google-verification-code',
 	},
 }
 
