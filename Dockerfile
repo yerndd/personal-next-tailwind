@@ -30,9 +30,9 @@ COPY --chown=nextjs:nodejs nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder --chown=nextjs:nodejs /app/out /usr/share/nginx/html
 
 # Create necessary directories with proper permissions
-RUN mkdir -p /var/cache/nginx /var/log/nginx /var/run && \
-    chown -R nextjs:nodejs /var/cache/nginx /var/log/nginx /var/run /usr/share/nginx/html && \
-    chmod -R 755 /var/cache/nginx /var/log/nginx /var/run
+RUN mkdir -p /tmp/client_temp /tmp/proxy_temp /tmp/fastcgi_temp /tmp/uwsgi_temp /tmp/scgi_temp && \
+    chown -R nextjs:nodejs /tmp /usr/share/nginx/html && \
+    chmod -R 755 /tmp /usr/share/nginx/html
 
 # Switch to non-root user
 USER nextjs
