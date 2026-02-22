@@ -1,3 +1,6 @@
 /* Component-specific styles */
+#header #header-image {
+    width: 4vw;
+}
 
 /* Add your component styles here */

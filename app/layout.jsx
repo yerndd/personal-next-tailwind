@@ -1,5 +1,8 @@
 import StoreProvider from '@/lib/StoreProvider'
 import '@/assets/css/index.css'
+import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
+import Preload from '@/components/features/Preload'
 
 export const metadata = {
 	title: {
@@ -71,14 +74,20 @@ export const viewport = {
 	themeColor: '#ffffff',
 }
 
-export default function RootLayout({children}) {
+const RootLayout = ({children}) => {
 	return (
 		<html lang='en'>
 			<body>
 				<StoreProvider>
+					<Header />
 					{children}
+					<Footer />
+					<Preload />
 				</StoreProvider>
 			</body>
 		</html>
 	)
 }
+
+export default RootLayout
+
