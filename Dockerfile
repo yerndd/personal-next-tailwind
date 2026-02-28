@@ -17,7 +17,9 @@ RUN addgroup -g 1001 -S nodejs && \
     adduser -S nextjs -u 1001 -G nodejs && \
     mkdir -p /tmp/client_temp /tmp/proxy_temp /tmp/fastcgi_temp /tmp/uwsgi_temp /tmp/scgi_temp && \
     chown -R nextjs:nodejs /tmp /usr/share/nginx/html && \
-    chmod -R 755 /tmp /usr/share/nginx/html
+    chmod -R 755 /tmp /usr/share/nginx/html && \
+    ln -sf /dev/stdout /var/log/nginx/access.log && \
+    ln -sf /dev/stderr /var/log/nginx/error.log
 
 # Copy nginx configuration and static files in one layer
 COPY --chown=nextjs:nodejs nginx.conf /etc/nginx/nginx.conf

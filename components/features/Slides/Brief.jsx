@@ -31,6 +31,8 @@ const Brief = () => {
 	return (
 		<section id="brief" className="rnd-container h-[100vh]">
 			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid, harum?</p>
+			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid, harum?</p>
+			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid, harum?</p>
 			<div>
 				<span ref={typedRef} /> Developer
 			</div>
