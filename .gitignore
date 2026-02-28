@@ -8,10 +8,9 @@ node_modules/
 
 # Testing
 coverage/
+scripts/
 .nyc_output
 *.lcov
-*.bat
-*.sh
 
 # Next.js
 .next/
