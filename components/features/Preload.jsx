@@ -1,26 +1,33 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 
 const Preload = () => {
 	const [isActive, setIsActive] = useState(true)
+	const activeClass = useMemo(() => isActive ? 'active' : '', [isActive])
 
 	useEffect(() => {
-		const timer = setTimeout(() => {
-			setIsActive(false)
-		}, 10000)
+		const handleLoad = () => {
+			setTimeout(() => {
+				setIsActive(false)
+			}, 1000)
+		}
 
-		return () => clearTimeout(timer)
+		if (document.readyState === 'complete') {
+			handleLoad()
+		} else {
+			window.addEventListener('load', handleLoad)
+		}
+
+		return () => window.removeEventListener('load', handleLoad)
 	}, [])
 
 	return (
 		<main
 			id="preload"
-			className={`fixed top-0 left-0 bg-white w-full h-full z-50 ${
-				isActive ? 'active' : ''
-			}`}
+			className={activeClass}
 		>
-			<div id="preload-image" className="relative">
+			<div id="preload-image">
 				<Image
 					src="/img/logo.png"
 					alt="RND Logo"
