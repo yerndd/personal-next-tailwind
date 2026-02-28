@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer'
 import Preload from '@/components/features/Preload'
 
 export const metadata = {
+	metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
 	title: {
 		default: 'Rindho Ananta Samat | Portfolio',
 		template: '%s | Rindho Ananta Samat',
@@ -76,8 +77,8 @@ export const viewport = {
 
 const RootLayout = ({children}) => {
 	return (
-		<html lang='en'>
-			<body>
+		<html lang="en">
+			<body suppressHydrationWarning>
 				<StoreProvider>
 					<Header />
 					{children}
