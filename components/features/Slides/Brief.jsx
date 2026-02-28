@@ -5,11 +5,9 @@ import Typed from 'typed.js'
 const typedArray = [
 	'Fullstack',
 	'React',
-	'Next.js',
 	'Vue.js',
-	'Nuxt',
-	'Spring',
-	'Express'
+	'Express',
+	'Spring'
 ]
 
 const Brief = () => {
