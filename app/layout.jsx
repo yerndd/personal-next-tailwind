@@ -1,8 +1,7 @@
-import StoreProvider from '@/lib/StoreProvider'
 import '@/assets/css/index.css'
-import Header from '@/components/layout/Header'
+import StoreProvider from '@/lib/StoreProvider'
 import Footer from '@/components/layout/Footer'
-import Preload from '@/components/features/Preload'
+import Preload from '@/components/layout/Preload'
 
 export const metadata = {
 	metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
@@ -80,7 +79,6 @@ const RootLayout = ({children}) => {
 		<html lang="en">
 			<body suppressHydrationWarning>
 				<StoreProvider>
-					<Header />
 					{children}
 					<Footer />
 					<Preload />

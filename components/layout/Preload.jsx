@@ -6,6 +6,16 @@ const Preload = () => {
 	const [isActive, setIsActive] = useState(true)
 	const activeClass = useMemo(() => isActive ? 'active' : '', [isActive])
 
+	const handleImageClick = () => {
+		const briefElement = document.getElementById('brief')
+		if (briefElement) {
+			briefElement.scrollIntoView({ 
+				behavior: 'smooth',
+				block: 'start'
+			})
+		}
+	}
+
 	useEffect(() => {
 		const handleLoad = () => {
 			setTimeout(() => {
@@ -33,7 +43,11 @@ const Preload = () => {
 			id="preload"
 			className={activeClass}
 		>
-			<div id="preload-image">
+			<div
+				id="preload-image"
+				onClick={handleImageClick}
+				style={{ cursor: 'pointer' }}
+			>
 				<Image
 					src="/img/logo.png"
 					alt="RND Logo"
