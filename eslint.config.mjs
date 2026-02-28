@@ -13,33 +13,33 @@ export default defineConfig([
 			'out/**',
 			'build/**',
 			'dist/**',
-			'public/**',
-		],
+			'public/**'
+		]
 	},
 	{
 		files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
 		plugins: {
 			react,
-			'@next/next': nextPlugin,
+			'@next/next': nextPlugin
 		},
 		languageOptions: {
 			parserOptions: {
 				ecmaVersion: 'latest',
 				sourceType: 'module',
 				ecmaFeatures: {
-					jsx: true,
-				},
+					jsx: true
+				}
 			},
 			globals: {
 				...globals.browser,
 				...globals.node,
-				...globals.es2021,
-			},
+				...globals.es2021
+			}
 		},
 		settings: {
 			react: {
-				version: 'detect',
-			},
+				version: 'detect'
+			}
 		},
 		rules: {
 			...nextPlugin.configs.recommended.rules,
@@ -53,15 +53,18 @@ export default defineConfig([
 			'react/jsx-indent': ['error', 'tab'],
 			'react/jsx-indent-props': ['error', 'tab'],
 			'react/jsx-closing-bracket-location': ['error', 'tag-aligned'],
+			'indent': ['error', 'tab'],
 			'react/self-closing-comp': ['error', { component: true, html: true }],
 			'quotes': ['error', 'single', { avoidEscape: true }],
 			'jsx-quotes': ['error', 'prefer-double'],
 			'no-unused-vars': ['warn', {argsIgnorePattern: '^_', varsIgnorePattern: '^_'}],
+			'no-undef': 'error',
 			'no-console': ['warn', {allow: ['warn', 'error']}],
 			'prefer-const': 'error',
 			'no-var': 'error',
 			'object-shorthand': 'error',
-			'semi': ['error', 'never'],
-		},
-	},
+			'comma-dangle': ['error', 'never'],
+			'semi': ['error', 'never']
+		}
+	}
 ])
