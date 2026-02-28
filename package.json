@@ -27,6 +27,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/postcss": "^4.1.13",
+    "autoprefixer": "^10.4.24",
     "next": "^16.1.6",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
@@ -35,7 +36,6 @@
     "typed.js": "^3.0.0"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.24",
     "cssnano": "^7.1.2",
     "eslint": "^9.39.3",
     "eslint-config-next": "^16.1.6",

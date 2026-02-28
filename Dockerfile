@@ -1,23 +1,15 @@
-# Stage 1: Dependencies
-FROM node:lts-alpine AS deps
+# Stage 1: Builder
+FROM node:lts-alpine AS builder
 WORKDIR /app
 
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev --no-fund --no-audit && \
     npm cache clean --force
 
-# Stage 2: Builder
-FROM node:lts-alpine AS builder
-WORKDIR /app
-
-# Copy all dependencies from deps stage
-COPY --from=deps /app/node_modules ./node_modules
-COPY package.json package-lock.json ./
-
 COPY . .
 RUN npm run build
 
-# Stage 3: Runner with Nginx
+# Stage 2: Runner with Nginx
 FROM nginx:alpine-slim AS runner
 
 # Create non-root user and setup in single layer
