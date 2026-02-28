@@ -2,13 +2,25 @@
 import { useEffect, useRef } from 'react'
 import Typed from 'typed.js'
 
+const typedArray = [
+	'Fullstack',
+	'React',
+	'Next.js',
+	'Vue.js',
+	'Nuxt',
+	'Spring',
+	'Express'
+]
+
 const Brief = () => {
 	const typedRef = useRef()
 
 	useEffect(() => {
 		const typed = new Typed(typedRef.current, {
-			strings: ['<i>First</i> sentence.', '&amp; a second sentence.'],
-			typeSpeed: 50,
+			strings: typedArray,
+			typeSpeed: 80,
+			backSpeed: 30,
+			backDelay: 1000,
 			loop: true
 		})
 
@@ -21,7 +33,9 @@ const Brief = () => {
 	return (
 		<section id="brief" className="rnd-container h-[100vh]">
 			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid, harum?</p>
-			<span ref={typedRef} />
+			<div>
+				<span ref={typedRef} /> Developer
+			</div>
 		</section>
 	)
 }

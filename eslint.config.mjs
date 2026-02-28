@@ -1,4 +1,4 @@
-import {defineConfig} from 'eslint/config'
+import { defineConfig } from 'eslint/config'
 import react from 'eslint-plugin-react'
 import nextPlugin from '@next/eslint-plugin-next'
 import globals from 'globals'
@@ -26,9 +26,7 @@ export default defineConfig([
 			parserOptions: {
 				ecmaVersion: 'latest',
 				sourceType: 'module',
-				ecmaFeatures: {
-					jsx: true
-				}
+				ecmaFeatures: { jsx: true }
 			},
 			globals: {
 				...globals.browser,
@@ -36,11 +34,7 @@ export default defineConfig([
 				...globals.es2021
 			}
 		},
-		settings: {
-			react: {
-				version: 'detect'
-			}
-		},
+		settings: { react: { version: 'detect' } },
 		rules: {
 			...nextPlugin.configs.recommended.rules,
 			...nextPlugin.configs['core-web-vitals'].rules,
@@ -55,15 +49,24 @@ export default defineConfig([
 			'react/jsx-closing-bracket-location': ['error', 'tag-aligned'],
 			'indent': ['error', 'tab'],
 			'react/self-closing-comp': ['error', { component: true, html: true }],
-			'quotes': ['error', 'single', { avoidEscape: true }],
+			'quotes': [
+				'error',
+				'single',
+				{ avoidEscape: true }
+			],
 			'jsx-quotes': ['error', 'prefer-double'],
-			'no-unused-vars': ['warn', {argsIgnorePattern: '^_', varsIgnorePattern: '^_'}],
+			'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
 			'no-undef': 'error',
-			'no-console': ['warn', {allow: ['warn', 'error']}],
+			'no-console': ['warn', { allow: ['warn', 'error'] }],
 			'prefer-const': 'error',
 			'no-var': 'error',
 			'object-shorthand': 'error',
 			'comma-dangle': ['error', 'never'],
+			'object-curly-newline': ['error', { multiline: true, minProperties: 3 }],
+			'object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
+			'array-element-newline': ['error', { multiline: true, minItems: 3 }],
+			'array-bracket-newline': ['error', { multiline: true, minItems: 3 }],
+			'object-curly-spacing': ['error', 'always'],
 			'semi': ['error', 'never']
 		}
 	}

@@ -1,4 +1,6 @@
-const Button = ({ children, variant = 'primary', className = '', ...props }) => {
+const Button = ({
+	children, variant = 'primary', className = '', ...props 
+}) => {
 	const baseStyles = 'px-4 py-2 rounded-lg font-medium transition-colors'
 	const variants = {
 		primary: 'bg-blue-600 text-white hover:bg-blue-700',

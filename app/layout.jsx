@@ -10,25 +10,40 @@ export const metadata = {
 		template: '%s | Rindho Ananta Samat'
 	},
 	description: 'Personal portfolio website showcasing projects, skills, and professional experience of Rindho Ananta Samat',
-	keywords: ['portfolio', 'web developer', 'Rindho Ananta Samat', 'personal website', 'next.js', 'tailwind css'],
+	keywords: [
+		'portfolio',
+		'web developer',
+		'Rindho Ananta Samat',
+		'personal website',
+		'next.js',
+		'tailwind css'
+	],
 	authors: [{ name: 'Rindho Ananta Samat' }],
 	creator: 'Rindho Ananta Samat',
 	publisher: 'Rindho Ananta Samat',
-	alternates: {
-		canonical: '/'
-	},
+	alternates: { canonical: '/' },
 	icons: {
 		icon: [
-			{ url: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-			{ url: '/favicon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+			{
+				url: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' 
+			},
+			{
+				url: '/favicon/favicon-32x32.png', sizes: '32x32', type: 'image/png' 
+			},
 			{ url: '/favicon/favicon.ico', sizes: 'any' }
 		],
 		apple: [
-			{ url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }
+			{
+				url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' 
+			}
 		],
 		other: [
-			{ rel: 'android-chrome', url: '/favicon/android-chrome-192x192.png', sizes: '192x192' },
-			{ rel: 'android-chrome', url: '/favicon/android-chrome-512x512.png', sizes: '512x512' }
+			{
+				rel: 'android-chrome', url: '/favicon/android-chrome-192x192.png', sizes: '192x192' 
+			},
+			{
+				rel: 'android-chrome', url: '/favicon/android-chrome-512x512.png', sizes: '512x512' 
+			}
 		]
 	},
 	manifest: '/favicon/site.webmanifest',
@@ -74,7 +89,7 @@ export const viewport = {
 	themeColor: '#ffffff'
 }
 
-const RootLayout = ({children}) => {
+const RootLayout = ({ children }) => {
 	return (
 		<html lang="en">
 			<body suppressHydrationWarning>
