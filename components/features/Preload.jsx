@@ -10,6 +10,9 @@ const Preload = () => {
 		const handleLoad = () => {
 			setTimeout(() => {
 				setIsActive(false)
+				// Enable scrolling and scroll to top
+				document.body.style.overflow = 'auto'
+				window.scrollTo(0, 0)
 			}, 1000)
 		}
 
@@ -19,7 +22,10 @@ const Preload = () => {
 			window.addEventListener('load', handleLoad)
 		}
 
-		return () => window.removeEventListener('load', handleLoad)
+		return () => {
+			window.removeEventListener('load', handleLoad)
+			document.body.style.overflow = 'auto'
+		}
 	}, [])
 
 	return (
