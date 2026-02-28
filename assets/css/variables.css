@@ -1,0 +1,30 @@
+/* Tailwind CSS v4 Theme Variables */
+@theme {
+    /* Red */
+    --color-red-dark: #E72547;
+    --color-red-light: #EA4461;
+
+    /* Orange */
+    --color-orange-dark: #F27724;
+    --color-orange-light: #F2964C;
+
+    /* Green */
+    --color-green-dark: #14CC6B;
+    --color-green-light: #42DB8D;
+
+    /* Blue */
+    --color-blue-dark: #3867D6;
+    --color-blue-light: #4B7BEC;
+
+    /* Dark */
+    --color-dark-primary: #19293c;
+    --color-dark-secondary: #435872;
+
+    /* Light */
+    --color-light-primary: #D2DAE3;
+    --color-light-secondary: #E8EDF3;
+
+    /* Neutral */
+    --color-white: #ffffff;
+    --color-black: #000000;
+}

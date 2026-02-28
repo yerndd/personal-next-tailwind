@@ -3,4 +3,48 @@
     width: 4vw;
 }
 
-/* Add your component styles here */
+@keyframes grayscale-pulse {
+
+    0%,
+    100% {
+        filter: grayscale(0);
+        opacity: 1;
+    }
+
+    50% {
+        filter: grayscale(1);
+        opacity: 0.5;
+    }
+}
+
+#preload {
+    transition: opacity 1s cubic-bezier(0.85, 0.05, 0.9, 0.95);
+}
+
+#preload.active {
+    opacity: 1;
+}
+
+#preload:not(.active) {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#preload #preload-image {
+    transition: height 0.8s ease-in-out, width 0.6s ease-in-out, top 0.8s cubic-bezier(0.35, 0.05, 0.45, 0.95);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#preload.active #preload-image {
+    width: 8vw;
+    height: 8vw;
+    top: calc(50% - 4vw);
+    animation: grayscale-pulse 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+#preload:not(.active) #preload-image {
+    width: 4vw;
+    height: 4vw;
+    top: calc(var(--spacing) * 4);
+}
