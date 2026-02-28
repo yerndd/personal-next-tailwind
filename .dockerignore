@@ -1,18 +1,44 @@
+# Dependencies
 node_modules
+
+# Build outputs
 .next
 out
 build
 dist
+
+# Git
 .git
 .gitignore
-.env*.local
+
+# IDE
 .vscode
 .idea
+.kiro
+
+# Environment
+.env*.local
+
+# Logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-README.md
-.DS_Store
+
+# Testing
 coverage
 .nyc_output
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Documentation
+README.md
+*.md
+!package.json
