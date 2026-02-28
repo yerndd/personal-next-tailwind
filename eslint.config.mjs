@@ -54,6 +54,8 @@ export default defineConfig([
 			'react/jsx-indent-props': ['error', 'tab'],
 			'react/jsx-closing-bracket-location': ['error', 'tag-aligned'],
 			'react/self-closing-comp': ['error', { component: true, html: true }],
+			'quotes': ['error', 'single', { avoidEscape: true }],
+			'jsx-quotes': ['error', 'prefer-double'],
 			'no-unused-vars': ['warn', {argsIgnorePattern: '^_', varsIgnorePattern: '^_'}],
 			'no-console': ['warn', {allow: ['warn', 'error']}],
 			'prefer-const': 'error',
