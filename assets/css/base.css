@@ -20,8 +20,7 @@ html {
 
 body {
     font-family: 'Alatsi', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    position: relative;
-    line-height: 1.6;
+    line-height: 1.2;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow: hidden;
@@ -29,7 +28,7 @@ body {
 
 main {
     position: relative;
-    height: 100vh;
+    height: 100dvh;
     overflow-y: scroll;
     scroll-snap-type: both mandatory;
 }

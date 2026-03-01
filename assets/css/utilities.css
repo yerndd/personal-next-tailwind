@@ -2,4 +2,6 @@
 .rnd-container {
     padding: 8% 15%;
     scroll-snap-align: center;
+    position: relative;
+    height: 100dvh;
 }

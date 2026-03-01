@@ -1,6 +1,6 @@
 /* Component-specific styles */
 #header #header-image {
-    width: 4vw;
+    width: 4dvw;
 }
 
 @keyframes grayscale-pulse {
@@ -21,8 +21,8 @@
     position: fixed;
     z-index: 100;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
     transition: all 1s ease-in-out;
     background-color: var(--color-white);
 
@@ -30,22 +30,22 @@
         top: 0;
 
         #preload-image {
-            width: 8vw;
-            height: 8vw;
-            top: calc(50% - 4vw);
-            left: calc(50% - 4vw);
+            width: 8dvw;
+            height: 8dvw;
+            top: calc(50% - 4dvw);
+            left: calc(50% - 4dvw);
             animation: grayscale-pulse 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
         }
     }
 
     &:not(.active) {
-        top: -100vh;
+        top: -100dvh;
 
         #preload-image {
-            width: 4vw;
-            height: 4vw;
+            width: 4dvw;
+            height: 4dvw;
             top: calc(var(--spacing) * 4);
-            left: calc(50% - 2vw);
+            left: calc(50% - 2dvw);
         }
     }
 
