@@ -4,11 +4,11 @@ import Profile from '@/components/features/Slides/Profile'
 
 const Page = () => {
 	return (
-		<main>
+		<>
 			<Brief />
 			<Profile />
 			<Footer />
-		</main>
+		</>
 	)
 }
 

@@ -27,4 +27,9 @@
     /* Neutral */
     --color-white: #ffffff;
     --color-black: #000000;
+
+    --transition-long: all .8s ease;
+    --transition-short: all .2s ease;
+
+    --total-page: 2;
 }
