@@ -1,147 +1,209 @@
-# GitHub Actions Setup Guide
+# GitHub Pages + Cloudflare Setup Guide
 
-## Prerequisites
+## Overview
 
-1. **GCP Project**: personal-app-489521
-2. **GKE Cluster**: Create using the script below
-3. **Service Account**: Will be created in Step 1
+This setup deploys your Next.js site to GitHub Pages (free) and uses Cloudflare (free) for:
+- Custom domain (rnd-app.com)
+- SSL/HTTPS
+- CDN (faster loading worldwide)
+- DDoS protection
 
-## Step 0: Create GKE Cluster (if not exists)
+**Total Cost: $0/month** (only domain registration ~$10-15/year)
 
-```powershell
-.\scripts\create-gke-cluster.ps1
-```
+---
 
-This will create:
-- Cluster name: `rnd-app-cluster`
-- Zone: `asia-southeast1-a`
-- Machine type: `e2-micro` (free tier eligible)
-- Cost: ~$7/month
+## Step 1: Enable GitHub Pages
 
-## Step 1: Create GCP Service Account
+1. Go to your repository settings:
+   ```
+   https://github.com/YOUR_USERNAME/personal-next-tailwind/settings/pages
+   ```
+
+2. Under "Build and deployment":
+   - Source: **GitHub Actions**
+
+3. Save changes
+
+---
+
+## Step 2: Deploy Your Site
+
+Push to main/master branch or manually trigger:
 
 ```bash
-# Set your project ID
-export PROJECT_ID="personal-app-489521"
-
-# Create service account
-gcloud iam service-accounts create github-actions \
-  --display-name="GitHub Actions" \
-  --project=$PROJECT_ID
-
-# Grant required roles
-gcloud projects add-iam-policy-binding $PROJECT_ID \
-  --member="serviceAccount:github-actions@${PROJECT_ID}.iam.gserviceaccount.com" \
-  --role="roles/container.developer"
-
-gcloud projects add-iam-policy-binding $PROJECT_ID \
-  --member="serviceAccount:github-actions@${PROJECT_ID}.iam.gserviceaccount.com" \
-  --role="roles/storage.admin"
-
-# Create and download key
-gcloud iam service-accounts keys create key.json \
-  --iam-account=github-actions@${PROJECT_ID}.iam.gserviceaccount.com
+git add .
+git commit -m "Setup GitHub Pages deployment"
+git push origin main
 ```
 
-## Step 2: Add GitHub Secrets
-
-Go to your repository → Settings → Secrets and variables → Actions
-
-Add these secrets:
-
-1. **GCP_PROJECT_ID**: Your GCP project ID
-2. **GCP_SA_KEY**: Contents of `key.json` file (entire JSON)
-
-## Step 3: Update Workflow Variables
-
-Edit `.github/workflows/build-and-deploy.yml` and update:
-
-```yaml
-env:
-  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  GKE_CLUSTER: rnd-app-cluster        # Your cluster name
-  GKE_ZONE: asia-southeast1-a          # Your cluster zone
-  DEPLOYMENT_NAME: rnd-app             # Your deployment name
-  IMAGE_NAME: rnd-app                  # Your image name
+Your site will be available at:
+```
+https://YOUR_USERNAME.github.io/personal-next-tailwind/
 ```
 
-## Step 4: Update Kubernetes Deployment
+---
 
-Update `kubernetes/deployment.yaml` to use GCR image:
+## Step 3: Setup Cloudflare
 
-```yaml
-spec:
-  containers:
-  - name: web
-    image: gcr.io/YOUR_PROJECT_ID/rnd-app:latest
+### 3.1 Add Your Domain to Cloudflare
+
+1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com/)
+2. Click "Add a site"
+3. Enter: `rnd-app.com`
+4. Select **Free plan**
+5. Click "Continue"
+
+### 3.2 Update Nameservers
+
+Cloudflare will show you 2 nameservers like:
+```
+ns1.cloudflare.com
+ns2.cloudflare.com
 ```
 
-## Workflows Overview
+Go to your domain registrar and update nameservers to these values.
 
-### 1. Build and Deploy (`build-and-deploy.yml`)
-- **Triggers**: Push to main/master, PR, manual
-- **Jobs**:
-  - Build Docker image with caching
-  - Security scan with Trivy
-  - Upload results to GitHub Security
-  - Deploy to GKE (only on push to main)
+**Wait 5-60 minutes** for DNS propagation.
 
-### 2. PR Quality Check (`pr-check.yml`)
-- **Triggers**: Pull requests
-- **Jobs**:
-  - ESLint code quality check
-  - Next.js build test
-  - Docker build test
-  - Security scan
+### 3.3 Add DNS Records
 
-### 3. Cleanup Old Images (`cleanup.yml`)
-- **Triggers**: Weekly (Sunday 2 AM), manual
-- **Jobs**:
-  - Delete old GCR images (keeps last 5)
-  - Saves storage costs
+In Cloudflare DNS settings, add these records:
 
-## Optimizations Included
+**For root domain (rnd-app.com):**
+```
+Type: CNAME
+Name: @
+Target: YOUR_USERNAME.github.io
+Proxy: ON (orange cloud)
+```
 
-1. **Docker layer caching** - Faster builds
-2. **Parallel jobs** - Build and scan run together
-3. **Conditional deployment** - Only deploys on main branch
-4. **Security scanning** - Trivy integration with GitHub Security
-5. **Automatic cleanup** - Removes old images weekly
-6. **Build verification** - Tests before deployment
+**For www subdomain:**
+```
+Type: CNAME
+Name: www
+Target: YOUR_USERNAME.github.io
+Proxy: ON (orange cloud)
+```
 
-## Manual Deployment
+---
 
-Trigger manual deployment:
-1. Go to Actions tab
-2. Select "Build and Deploy to GKE"
-3. Click "Run workflow"
-4. Select branch and run
+## Step 4: Configure GitHub Pages Custom Domain
 
-## Monitoring
+1. Go back to GitHub Pages settings
+2. Under "Custom domain", enter: `rnd-app.com`
+3. Check "Enforce HTTPS" (wait a few minutes if not available yet)
+4. Save
 
-View deployment status:
-- **Actions tab**: See workflow runs
-- **Security tab**: View vulnerability reports
-- **GKE Console**: Monitor cluster health
+---
+
+## Step 5: Create CNAME File
+
+Create a file in your repository root:
+
+**File: `public/CNAME`**
+```
+rnd-app.com
+```
+
+Commit and push:
+```bash
+git add public/CNAME
+git commit -m "Add custom domain"
+git push origin main
+```
+
+---
+
+## Step 6: Cloudflare SSL Settings
+
+1. In Cloudflare, go to **SSL/TLS** → **Overview**
+2. Set encryption mode to: **Full**
+3. Go to **SSL/TLS** → **Edge Certificates**
+4. Enable:
+   - Always Use HTTPS: **ON**
+   - Automatic HTTPS Rewrites: **ON**
+
+---
+
+## Step 7: Optimize Cloudflare (Optional)
+
+### Speed Settings
+Go to **Speed** → **Optimization**:
+- Auto Minify: Enable HTML, CSS, JS
+- Brotli: ON
+
+### Caching
+Go to **Caching** → **Configuration**:
+- Caching Level: Standard
+- Browser Cache TTL: 4 hours
+
+---
+
+## Verification
+
+After setup (wait 5-10 minutes), visit:
+- https://rnd-app.com
+- https://www.rnd-app.com
+
+Both should show your site with:
+- ✓ HTTPS/SSL (padlock icon)
+- ✓ Fast loading (Cloudflare CDN)
+- ✓ Custom domain
+
+---
 
 ## Troubleshooting
 
-### Authentication Failed
-- Verify `GCP_SA_KEY` secret is correct JSON
-- Check service account has required roles
+### Site not loading
+- Wait 5-60 minutes for DNS propagation
+- Check nameservers are updated at your registrar
+- Verify CNAME file exists in `public/CNAME`
 
-### Build Failed
-- Check Docker build locally first
-- Review build logs in Actions tab
+### SSL errors
+- Set Cloudflare SSL mode to "Full"
+- Wait for GitHub Pages to provision SSL (can take 24 hours)
+- Ensure "Enforce HTTPS" is checked in GitHub Pages settings
 
-### Deployment Failed
-- Verify GKE cluster is running
-- Check kubectl commands work locally
-- Review deployment logs
+### 404 errors
+- Verify GitHub Pages is set to "GitHub Actions" source
+- Check workflow ran successfully in Actions tab
+- Ensure `out` directory was created in build
 
-## Cost Optimization
+---
 
-- Workflows use GitHub-hosted runners (free for public repos)
-- Docker layer caching reduces build time
-- Weekly cleanup reduces GCR storage costs
-- e2-micro node keeps GKE costs minimal (~$7/month)
+## Updating Your Site
+
+Just push to main/master:
+```bash
+git add .
+git commit -m "Update site"
+git push origin main
+```
+
+GitHub Actions will automatically:
+1. Build your Next.js site
+2. Deploy to GitHub Pages
+3. Cloudflare will cache and serve it globally
+
+---
+
+## Monitoring
+
+- **GitHub Actions**: Check deployment status in Actions tab
+- **Cloudflare Analytics**: View traffic, bandwidth, threats blocked
+- **GitHub Pages**: See deployment history in repository settings
+
+---
+
+## Cost Breakdown
+
+| Service | Cost |
+|---------|------|
+| GitHub Pages | FREE |
+| Cloudflare | FREE |
+| SSL Certificate | FREE |
+| CDN | FREE |
+| Bandwidth | FREE (unlimited) |
+| Domain (rnd-app.com) | ~$10-15/year |
+
+**Total: $0/month** 🎉
