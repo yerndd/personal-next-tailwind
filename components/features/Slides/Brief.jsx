@@ -39,7 +39,7 @@ const Brief = () => {
 					height={500}
 					priority
 					quality={100}
-					className="px-2"
+					className="px-10"
 					id="profile-image"
 				/>
 			</div>

@@ -1,5 +1,4 @@
 /* Component-specific styles for customs */
-
 @keyframes grayscale-pulse {
 
     0%,
@@ -14,12 +13,29 @@
     }
 }
 
+@keyframes profile-image {
+    0% {
+        top: 15%;
+        height: 70%;
+    }
+
+    50% {
+        top: 15%;
+        height: 40%;
+    }
+
+    100% {
+        top: -85%;
+        height: 40%;
+    }
+}
+
 #preload {
     position: fixed;
     z-index: 100;
     left: 0;
-    width: 100dvw;
-    height: 100dvh;
+    width: 100%;
+    height: 100%;
     transition: var(--transition-long);
     background-color: var(--color-white);
 
@@ -36,7 +52,7 @@
     }
 
     &:not(.active) {
-        top: -100dvh;
+        top: -100%;
 
         #preload-image {
             width: 4dvw;
@@ -57,10 +73,10 @@
 
 #profile-image {
     position: fixed;
-    top: 8%;
     left: 15%;
     width: calc(70% / 3);
-    height: 84%;
     object-fit: cover;
     object-position: center bottom;
+    animation: profile-image auto linear forwards;
+    animation-timeline: scroll();
 }
