@@ -1,8 +1,4 @@
 /* Utility classes */
-@function --page-position(--current-page) {
-    result: calc(((var(--current-page) - 1) / (var(--total-page) - 1)) * 100%)
-}
-
 .contain-layout {
     contain: layout;
 }
