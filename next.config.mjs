@@ -3,11 +3,9 @@ const nextConfig = {
 	reactStrictMode: true,
 	poweredByHeader: false,
 	compress: true,
-	output: 'export',
 	trailingSlash: true,
 
 	images: {
-		unoptimized: true,
 		deviceSizes: [
 			640,
 			750,
@@ -30,6 +28,7 @@ const nextConfig = {
 		],
 		formats: ['image/webp'],
 		qualities: [
+			20,
 			75,
 			90,
 			100
