@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: personal-app
+  name: rnd-app
   labels:
-    app: personal-app
+    app: rnd-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: personal-app
+      app: rnd-app
   template:
     metadata:
       labels:
-        app: personal-app
+        app: rnd-app
     spec:
       containers:
       - name: web
-        image: localhost/personal-app:latest
-        imagePullPolicy: IfNotPresent
+        image: gcr.io/personal-app-489521/rnd-app:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
           protocol: TCP
