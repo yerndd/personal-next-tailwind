@@ -1,6 +1,5 @@
 import '@/assets/css/index.css'
 import StoreProvider from '@/lib/StoreProvider'
-import Footer from '@/components/layout/Footer'
 import Preload from '@/components/layout/Preload'
 
 export const metadata = {
@@ -95,7 +94,6 @@ const RootLayout = ({ children }) => {
 			<body suppressHydrationWarning>
 				<StoreProvider>
 					{children}
-					<Footer />
 					<Preload />
 				</StoreProvider>
 			</body>

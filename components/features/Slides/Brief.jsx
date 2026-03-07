@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import Typed from 'typed.js'
 
@@ -30,10 +31,18 @@ const Brief = () => {
 
 	return (
 		<section id="brief" className="rnd-container flex items-center">
-			<div className="flex-1">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid sapiente facere adipisci libero sed sit enim, assumenda quod illo quibusdam consequuntur sint qui eius vero laudantium? Fuga deserunt nobis eligendi?
+			<div className="w-1/3 relative h-full">
+				<Image
+					src="/img/profile.png"
+					alt="RND Profile"
+					width={500}
+					height={500}
+					priority
+					quality={100}
+					id="profile-image"
+				/>
 			</div>
-			<div className="flex-2">
+			<div className="w-2/3">
 				<p className="text-dark-primary text-[20pt]">i am,</p>
 				<p className="text-red-dark text-[36pt]">Rindho Ananta<br />Samat</p>
 				<p className="text-dark-primary text-[36pt]">

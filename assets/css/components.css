@@ -57,3 +57,21 @@
         margin-right: auto;
     }
 }
+
+.rnd-container {
+    padding: 8% 15%;
+    scroll-snap-align: center;
+    position: relative;
+    height: 100dvh;
+}
+
+#profile-image {
+    position: fixed;
+    top: 8%;
+    left: 15%;
+    width: calc(70% / 3);
+    height: 84%;
+    padding: 0 2%;
+    object-fit: contain;
+    object-position: center;
+}
