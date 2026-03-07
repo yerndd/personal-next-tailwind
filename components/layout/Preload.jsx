@@ -52,8 +52,6 @@ const Preload = () => {
 					alt="RND Logo"
 					fill
 					priority
-					sizes={256}
-					quality={90}
 					className="object-contain"
 				/>
 			</div>

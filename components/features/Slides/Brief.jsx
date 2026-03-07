@@ -38,7 +38,6 @@ const Brief = () => {
 					width={500}
 					height={500}
 					priority
-					quality={100}
 					className="px-10"
 					id="profile-image"
 				/>
