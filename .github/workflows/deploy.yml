@@ -14,14 +14,39 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  security-events: write
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: .
+          format: sarif
+          output: trivy-results.sarif
+          severity: HIGH,CRITICAL
+
+      - name: Upload Trivy results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: trivy-results.sarif
+
   build:
     name: Build Next.js Site
+    needs: security-scan
     runs-on: ubuntu-latest
 
     steps:
