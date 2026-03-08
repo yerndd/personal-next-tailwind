@@ -78,7 +78,8 @@ export const metadata = {
 			'max-image-preview': 'large',
 			'max-snippet': -1
 		}
-	}
+	},
+	other: { 'Cache-Control': 'no-cache' }
 }
 
 export const viewport = {
