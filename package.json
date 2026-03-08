@@ -1,6 +1,6 @@
 {
   "name": "personal-next-tailwind",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Personal Web for Profile",
   "author": "Rindho Ananta Samat",
   "license": "ISC",
@@ -45,6 +45,7 @@
     "minimatch": "^10.2.2"
   },
   "overrides": {
-    "minimatch": "^10.2.2"
+    "minimatch": "^10.2.2",
+    "zlib": "^1.0.8"
   }
 }
