@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	output: 'export',
-	basePath: '/personal-next-tailwind',
-	assetPrefix: '/personal-next-tailwind',
+	// Remove basePath and assetPrefix when using custom domain
+	// basePath: '/personal-next-tailwind',
+	// assetPrefix: '/personal-next-tailwind',
 	reactStrictMode: true,
 	poweredByHeader: false,
 	compress: true,
