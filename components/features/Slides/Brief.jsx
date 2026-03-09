@@ -1,4 +1,5 @@
 'use client'
+import Container from '@/components/ui/Container'
 import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import Typed from 'typed.js'
@@ -30,7 +31,7 @@ const Brief = () => {
 	}, [])
 
 	return (
-		<section id="brief" className="rnd-container flex items-center">
+		<Container id="brief" className="flex items-center" big padded>
 			<div className="w-1/3 relative h-full">
 				<Image
 					src="/img/profile.png"
@@ -49,7 +50,7 @@ const Brief = () => {
 					<span className="font-bold" ref={typedRef} /> Developer
 				</p>
 			</div>
-		</section>
+		</Container>
 	)
 }
 

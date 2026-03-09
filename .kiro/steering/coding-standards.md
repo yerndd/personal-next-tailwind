@@ -29,6 +29,7 @@ This project follows strict ESLint rules. Always adhere to these standards when 
 ### Code Quality
 - **Unused variables**: Prefix unused variables/args with underscore `_` to suppress warnings
 - **Console statements**: Only `console.warn()` and `console.error()` are allowed, avoid `console.log()`
+- **Variants object formatting**: For objects named `variants`, use single line if 3 or fewer properties, multiline if more than 3
 
 ### Next.js Rules
 - Follow Next.js recommended rules and core web vitals standards
@@ -68,6 +69,17 @@ export default Header
 // Self-closing empty tags
 <div />
 <span />
+
+// Variants object - single line if 3 or fewer properties
+const variants = { primary: 'btn-primary', secondary: 'btn-secondary', danger: 'btn-danger' }
+
+// Variants object - multiline if more than 3 properties
+const variants = {
+	primary: 'btn-primary',
+	secondary: 'btn-secondary',
+	danger: 'btn-danger',
+	success: 'btn-success'
+}
 ```
 
 ### Bad ✗

@@ -1,10 +1,41 @@
 /* Component-specific styles for reuse */
 
 .rnd-container {
-    padding: 15dvh 15%;
-    scroll-snap-align: center;
     position: relative;
-    height: 100dvh;
+
+    &.padded {
+        padding: 15dvh 15%;
+    }
+
+    &.big {
+        scroll-snap-align: center;
+        height: 100dvh;
+    }
+
+    &.border-dark {
+        border-left: 3px solid var(--color-dark-primary);
+        border-bottom: 3px solid var(--color-dark-primary);
+    }
+
+    &.border-red {
+        border-left: 3px solid var(--color-red-dark);
+        border-bottom: 3px solid var(--color-red-dark);
+    }
+
+    &.border-orange {
+        border-left: 3px solid var(--color-orange-dark);
+        border-bottom: 3px solid var(--color-orange-dark);
+    }
+
+    &.border-green {
+        border-left: 3px solid var(--color-green-dark);
+        border-bottom: 3px solid var(--color-green-dark);
+    }
+
+    &.border-blue {
+        border-left: 3px solid var(--color-blue-dark);
+        border-bottom: 3px solid var(--color-blue-dark);
+    }
 }
 
 .rnd-button {

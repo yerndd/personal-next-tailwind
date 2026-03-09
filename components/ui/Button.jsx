@@ -1,8 +1,8 @@
 const Button = ({
-	children, variant = 'primary', className = '', ...props 
+	children, variant = 'dark', className = '', ...props 
 }) => {
 	const baseStyles = 'rnd-button'
-	const variants = { primary: '', red: 'rnd-button-red' }
+	const variants = { dark: '', red: 'rnd-button-red' }
 
 	return (
 		<button className={`${baseStyles} ${variants[variant]} ${className}`} {...props}>

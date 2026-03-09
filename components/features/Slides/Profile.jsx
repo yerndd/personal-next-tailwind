@@ -1,17 +1,58 @@
-import Button from '@/components/ui/Button'
+import Container from '@/components/ui/Container'
+import SeeResumeButton from '../Customs/SeeResumeButton'
 
 const Profile = () => {
+	const dob = new Date('2000-11-08')
+	const ageDifMs = Date.now() - dob.getTime()
+	const ageDate = new Date(ageDifMs)
+	const age = ageDate.getUTCFullYear() - 1970
+
 	return (
-		<section id="profile" className="rnd-container flex">
+		<Container id="profile" className="flex" big padded>
 			<div className="w-1/3 px-10 pt-[42dvh]">
-				<Button variant="red">
-					test
-				</Button>
+				<SeeResumeButton />
 			</div>
 			<div className="w-2/3">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime est praesentium doloribus alias, cum deleniti dolor! Vitae quisquam eligendi explicabo vero ratione. Eveniet enim tempore totam similique nemo. Natus, dolorem?
+				<Container border="dark" className="px-3 py-2 mb-2">
+					<div className="text-xl">
+						Rindho Ananta Samat
+						<span className="text-red-dark">
+							(He/Him)
+						</span>
+					</div>
+					<div className="text-orange-dark">
+						Fullstack Web Developer
+					</div>
+					<div className="text-justify">
+						I am a knowledgeable and skilled software development professional offering advanced abilities in wide range of programming languages, including Node.js and PHP. I am passionate to learn new things and result oriented person.
+					</div>
+				</Container>
+				<Container border="orange" className="px-3 py-2 mb-2 flex">
+					<div className="w-1/3">Hobby</div>
+					<div className="w-2/3">Gaming, Learning</div>
+				</Container>
+				<Container border="green" className="px-3 py-2 mb-2 flex">
+					<div className="w-1/3">Date of Birth</div>
+					<div className="w-2/3">November 8<sup>th</sup> 2000 ({age} y.o)</div>
+				</Container>
+				<Container border="red" className="px-3 py-2 mb-2 flex">
+					<div className="w-1/3">Location</div>
+					<div className="w-2/3">West Jakarta, Jakarta, Indonesia</div>
+				</Container>
+				<Container border="blue" className="px-3 py-2 mb-2 flex">
+					<div className="w-1/3">Phone</div>
+					<div className="w-2/3">+62 819 1010 4411</div>
+				</Container>
+				<Container border="dark" className="px-3 py-2 mb-2 flex">
+					<div className="w-1/3">Email</div>
+					<div className="w-2/3">
+						<a href="mailto:rindho_samat@rnd-app.com" className="text-blue-dark">
+							rindho_samat@rnd-app.com
+						</a>
+					</div>
+				</Container>
 			</div>
-		</section>
+		</Container>
 	)
 }
 
