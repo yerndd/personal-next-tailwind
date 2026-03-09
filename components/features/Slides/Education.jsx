@@ -1,14 +1,15 @@
 import Button from '@/components/ui/Button'
+import Container from '@/components/ui/Container'
 
 const Education = () => {
 	return (
-		<section id="education" className="rnd-container flex">
+		<Container id="education" className="flex" big padded>
 			<div className="w-1/3 px-2">
 				<Button>
 					test
 				</Button>
 			</div>
-		</section>
+		</Container>
 	)
 }
 
