@@ -11,8 +11,8 @@
   ],
   "scripts": {
     "dev": "npm -w portfolio run dev",
-    "build": "npm -w rnd-ui run build && npm -w portfolio run build",
-    "build:ui": "npm -w rnd-ui run build",
+    "build": "npm -w rnd-ui run build:all && npm -w portfolio run build",
+    "build:ui": "npm -w rnd-ui run build:all",
     "build:portfolio": "npm -w portfolio run build",
     "lint": "npm -ws run lint",
     "lint:fix": "npm -ws run lint:fix"

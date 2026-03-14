@@ -7,11 +7,16 @@ export default defineConfig({
 		'cjs'
 	],
 	jsx: true,
+	jsxImportSource: 'react',
 	dts: false,
 	clean: true,
 	sourcemap: true,
 	external: [
 		'react',
-		'react-dom'
-	]
+		'react-dom',
+		'react/jsx-runtime'
+	],
+	esbuildOptions(options) {
+		options.jsx = 'automatic'
+	}
 })
