@@ -12,9 +12,9 @@ const Profile = () => {
 			<div className="w-1/3 px-10 pt-[42dvh]">
 				<SeeResumeButton />
 			</div>
-			<div className="w-2/3">
+			<div className="w-2/3 text-base">
 				<Container border="dark" className="px-3 py-2 mb-2">
-					<div className="text-xl">
+					<div className="text-2xl">
 						Rindho Ananta Samat
 						<span className="text-red-dark">
 							(He/Him)
