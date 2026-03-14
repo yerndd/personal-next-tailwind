@@ -1,13 +1,16 @@
 'use client'
-import {
-	useEffect, useMemo, useState 
-} from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
+
+/** Delay in ms before the preload overlay fades out after page load */
+const PRELOAD_DELAY = 1000
+
+/** Scroll options used when navigating to the brief section */
+const SCROLL_OPTIONS = { behavior: 'smooth', block: 'start' }
 
 /**
  * Full-screen preload overlay shown while the page is loading.
- * Fades out 1 second after the window `load` event fires,
- * then scrolls the viewport back to the top.
+ * Fades out after page load, then scrolls the viewport back to the top.
  * Clicking the logo scrolls smoothly to the `#brief` section.
  *
  * @returns {JSX.Element}
@@ -15,8 +18,8 @@ import Image from 'next/image'
 const Preload = () => {
 	const [isActive, setIsActive] = useState(true)
 
-	// Derive CSS class from active state to drive the CSS transition
-	const activeClass = useMemo(() => isActive ? 'active' : '', [isActive])
+	// Derive class string directly — no useMemo needed for a trivial ternary
+	const activeClass = isActive ? 'active' : ''
 
 	/**
 	 * Smoothly scrolls to the brief section when the logo is clicked.
@@ -24,7 +27,7 @@ const Preload = () => {
 	const handleImageClick = () => {
 		const briefElement = document.getElementById('brief')
 		if (briefElement) {
-			briefElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+			briefElement.scrollIntoView(SCROLL_OPTIONS)
 		}
 	}
 
@@ -37,7 +40,7 @@ const Preload = () => {
 			setTimeout(() => {
 				setIsActive(false)
 				window.scrollTo(0, 0)
-			}, 1000)
+			}, PRELOAD_DELAY)
 		}
 
 		// If the page already loaded before this effect ran, call immediately
@@ -55,7 +58,8 @@ const Preload = () => {
 			<div
 				id="preload-image"
 				onClick={handleImageClick}
-				style={{ cursor: 'pointer' }}
+				role="button"
+				tabIndex={0}
 			>
 				<Image
 					src="/img/logo.png"

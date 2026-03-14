@@ -4,7 +4,12 @@
 
 /** @type {Record<BorderVariant, string>} */
 const borders = {
-	default: '', dark: 'border-dark', red: 'border-red', orange: 'border-orange', green: 'border-green', blue: 'border-blue'
+	default: '',
+	dark: 'border-dark',
+	red: 'border-red',
+	orange: 'border-orange',
+	green: 'border-green',
+	blue: 'border-blue'
 }
 
 /**

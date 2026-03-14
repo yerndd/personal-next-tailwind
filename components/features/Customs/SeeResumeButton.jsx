@@ -1,6 +1,9 @@
 'use client'
 import Button from '@/components/ui/Button'
 
+/** Path to the resume PDF served from the public directory */
+const RESUME_PATH = '/resume.pdf'
+
 /**
  * Button that opens the resume PDF in a new browser tab.
  * Marked as a client component since it uses a browser API (`window.open`).
@@ -8,13 +11,13 @@ import Button from '@/components/ui/Button'
  * @returns {JSX.Element}
  */
 const SeeResumeButton = () => {
-	/** Opens `/resume.pdf` in a new tab */
-	const buttonClicked = () => window.open('/resume.pdf', '_blank')
+	/** Opens the resume PDF in a new tab */
+	const handleClick = () => window.open(RESUME_PATH, '_blank')
 
 	return (
 		<Button
 			variant="red"
-			onClick={buttonClicked}
+			onClick={handleClick}
 		>
 			See Resume
 		</Button>

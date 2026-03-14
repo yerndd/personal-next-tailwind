@@ -1,6 +1,9 @@
 import Container from '@/components/ui/Container'
 import SeeResumeButton from '../Customs/SeeResumeButton'
 
+/** Date of birth — used to compute age at render time */
+const DOB = '2000-11-08'
+
 /**
  * Calculates the current age from a date of birth string.
  *
@@ -12,6 +15,9 @@ const getAge = (dob) => {
 	return ageDate.getUTCFullYear() - 1970
 }
 
+/** Pre-computed age — stable for the lifetime of the module */
+const age = getAge(DOB)
+
 /**
  * Profile slide section.
  * Displays personal info including name, role, bio, and contact details.
@@ -20,8 +26,6 @@ const getAge = (dob) => {
  * @returns {JSX.Element}
  */
 const Profile = () => {
-	const age = getAge('2000-11-08')
-
 	return (
 		<Container id="profile" className="flex" big padded>
 			<div className="w-1/3 px-10 pt-[42dvh]">
@@ -31,13 +35,9 @@ const Profile = () => {
 				<Container border="dark" className="px-3 py-2 mb-2">
 					<div className="text-2xl">
 						Rindho Ananta Samat
-						<span className="text-red-dark">
-							(He/Him)
-						</span>
+						<span className="text-red-dark">(He/Him)</span>
 					</div>
-					<div className="text-orange-dark">
-						Fullstack Web Developer
-					</div>
+					<div className="text-orange-dark">Fullstack Web Developer</div>
 					<div className="text-justify">
 						I am a knowledgeable and skilled software development professional offering advanced abilities in wide range of programming languages, including Node.js and PHP. I am passionate to learn new things and result oriented person.
 					</div>

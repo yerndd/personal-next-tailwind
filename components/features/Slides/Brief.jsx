@@ -1,20 +1,30 @@
 'use client'
-import Container from '@/components/ui/Container'
-import Image from 'next/image'
 import { useEffect, useRef } from 'react'
+import Image from 'next/image'
 import Typed from 'typed.js'
 
+import Container from '@/components/ui/Container'
+
 /**
- * Rotating developer role strings displayed in the typing animation.
+ * Typed.js configuration — defined at module scope to avoid recreation on each render.
  * @type {string[]}
  */
-const typedArray = [
+const TYPED_STRINGS = [
 	'Fullstack',
 	'React',
 	'Vue.js',
 	'Express',
 	'Spring'
 ]
+
+/** Typed.js instance options */
+const TYPED_OPTIONS = {
+	strings: TYPED_STRINGS,
+	typeSpeed: 80,
+	backSpeed: 30,
+	backDelay: 1000,
+	loop: true
+}
 
 /**
  * Brief intro slide — the first section of the portfolio.
@@ -25,16 +35,10 @@ const typedArray = [
  */
 const Brief = () => {
 	/** @type {React.RefObject<HTMLSpanElement>} */
-	const typedRef = useRef()
+	const typedRef = useRef(null)
 
 	useEffect(() => {
-		const typed = new Typed(typedRef.current, {
-			strings: typedArray,
-			typeSpeed: 80,
-			backSpeed: 30,
-			backDelay: 1000,
-			loop: true
-		})
+		const typed = new Typed(typedRef.current, TYPED_OPTIONS)
 
 		// Destroy Typed instance on unmount to prevent memory leaks
 		return () => typed.destroy()
