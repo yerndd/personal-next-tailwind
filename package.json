@@ -10,7 +10,8 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "run-p dev:ui dev:app",
+    "dev": "run-s build:ui dev:all",
+    "dev:all": "run-p dev:ui dev:app",
     "dev:app": "npm -w portfolio run dev",
     "dev:ui": "npm -w rnd-ui run dev",
     "build": "run-s build:ui build:portfolio",

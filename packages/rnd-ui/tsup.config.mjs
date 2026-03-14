@@ -1,22 +1,22 @@
 import { defineConfig } from 'tsup'
 
-export default defineConfig({
+export default defineConfig((options) => ({
 	entry: ['src/index.js'],
 	format: [
 		'esm',
 		'cjs'
 	],
 	jsx: true,
-	jsxImportSource: 'react',
 	dts: false,
-	clean: true,
+	// Only clean on full build, not during watch — prevents wiping styles.css
+	clean: !options.watch,
 	sourcemap: true,
 	external: [
 		'react',
 		'react-dom',
 		'react/jsx-runtime'
 	],
-	esbuildOptions(options) {
-		options.jsx = 'automatic'
+	esbuildOptions(esbuildOpts) {
+		esbuildOpts.jsx = 'automatic'
 	}
-})
+}))
