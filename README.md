@@ -15,7 +15,29 @@
 
 ## ✨ Overview
 
-Personal portfolio website showcasing my profile, skills, and experience as a Fullstack Web Developer. Features a smooth preload animation, animated typing effect, and a clean slide-based layout.
+A monorepo containing a personal portfolio website and a shared UI component library (`rnd-ui`). The portfolio showcases my profile, skills, and experience as a Fullstack Web Developer — featuring a smooth preload animation, animated typing effect, and a clean slide-based layout.
+
+---
+
+## � Monorepo Structure
+
+```
+├── apps/
+│   └── portfolio/            # Next.js portfolio app
+│       ├── app/              # Pages and layouts (App Router)
+│       ├── components/
+│       │   ├── features/     # Page sections (Brief, Profile, Education)
+│       │   └── layout/       # Preload screen, Footer
+│       ├── lib/              # Redux store, slices, hooks
+│       ├── assets/css/       # Global styles, Tailwind theme variables
+│       └── public/           # Images, resume PDF
+└── packages/
+    └── rnd-ui/               # Shared UI component library
+        ├── src/
+        │   ├── components/   # Button, Container
+        │   └── styles/       # Design tokens, component CSS, Alatsi font
+        └── dist/             # Built output (JS + styles.css)
+```
 
 ---
 
@@ -27,13 +49,14 @@ Personal portfolio website showcasing my profile, skills, and experience as a Fu
 | Styling | Tailwind CSS 4 |
 | State | Redux Toolkit |
 | Animation | Typed.js |
+| UI Library | rnd-ui (local workspace package) |
 | Hosting | GitHub Pages |
 | CDN / DNS | Cloudflare |
 | CI/CD | GitHub Actions |
 
 ---
 
-## 🚀 Getting Started
+## � Getting Started
 
 ```bash
 git clone https://github.com/yerndd/personal-next-tailwind.git
@@ -44,30 +67,31 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+> `npm run dev` builds `rnd-ui` first, then starts both the Next.js dev server and tsup watch in parallel.
+
 ---
 
 ## 📜 Scripts
 
 ```bash
-npm run dev       # Dev server (Turbopack)
-npm run build     # Static export → /out
-npm run lint      # ESLint check
-npm run lint:fix  # ESLint autofix
+npm run dev            # Build rnd-ui, then start Next.js + tsup watch
+npm run build          # Build rnd-ui then portfolio → apps/portfolio/out
+npm run build:ui       # Build rnd-ui only (JS + CSS)
+npm run build:portfolio  # Build portfolio only
+npm run lint           # ESLint check (all workspaces)
+npm run lint:fix       # ESLint autofix (all workspaces)
 ```
 
 ---
 
-## 📁 Project Structure
+## � rnd-ui
 
-```
-├── app/                  # Pages and layouts (App Router)
-├── components/
-│   ├── features/         # Page sections (Brief, Profile, Education)
-│   ├── layout/           # Preload screen, Footer
-│   └── ui/               # Button, Container
-├── lib/                  # Redux store, slices, hooks
-├── assets/css/           # Global styles, Tailwind theme variables
-└── public/               # Images, fonts, resume PDF
+Shared component library published to npm. Exports `Button`, `Container`, base styles, and the Alatsi font.
+
+```bash
+# Publish a new version (triggers CI on tag push)
+git tag rnd-ui@0.2.0
+git push origin rnd-ui@0.2.0
 ```
 
 ---
