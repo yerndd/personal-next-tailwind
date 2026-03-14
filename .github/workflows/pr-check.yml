@@ -42,13 +42,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Next.js
-        run: npm run build
+      - name: Build rnd-ui
+        run: npm run build:ui
+
+      - name: Build portfolio
+        run: npm run build:portfolio
 
       - name: Check build output
         run: |
-          if [ ! -d "out" ]; then
-            echo "Build failed: out directory not found"
+          if [ ! -d "apps/portfolio/out" ]; then
+            echo "Build failed: apps/portfolio/out directory not found"
             exit 1
           fi
-          echo "Build successful - out directory created"
+          echo "Build successful"

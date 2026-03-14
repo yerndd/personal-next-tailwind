@@ -1,0 +1,27 @@
+/* RND UI — design tokens */
+@font-face {
+    font-family: 'Alatsi';
+    src: url('./fonts/Alatsi-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --color-red-dark: #E72547;
+    --color-red-light: #EA4461;
+    --color-orange-dark: #F27724;
+    --color-orange-light: #F2964C;
+    --color-green-dark: #14CC6B;
+    --color-green-light: #42DB8D;
+    --color-blue-dark: #3867D6;
+    --color-blue-light: #4B7BEC;
+    --color-dark-primary: #19293c;
+    --color-dark-secondary: #435872;
+    --color-light-primary: #D2DAE3;
+    --color-light-secondary: #E8EDF3;
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --transition-long: all .8s ease;
+    --transition-short: all .2s ease;
+}
