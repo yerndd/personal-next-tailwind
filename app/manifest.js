@@ -1,5 +1,12 @@
+/** Force static generation for this route */
 export const dynamic = 'force-static'
 
+/**
+ * Generates the Web App Manifest for PWA support.
+ * Served at `/manifest.webmanifest` by Next.js.
+ *
+ * @returns {import('next').MetadataRoute.Manifest}
+ */
 export default function manifest() {
 	return {
 		name: 'Rindho Ananta Samat Portfolio',

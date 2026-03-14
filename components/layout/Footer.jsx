@@ -1,3 +1,8 @@
+/**
+ * Site footer — displays copyright notice with the current year.
+ *
+ * @returns {JSX.Element}
+ */
 const Footer = () => {
 	return (
 		<footer className="border-t py-6">

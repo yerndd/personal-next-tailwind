@@ -4,135 +4,153 @@ inclusion: always
 
 # Project Coding Standards
 
-## ESLint Configuration Rules
+## Syntax Rules
+- No semicolons — `semi: ['error', 'never']`
+- Prefer `const`, use `let` only when reassignment is needed, never `var`
+- Object shorthand: `{ name }` not `{ name: name }`
+- Self-closing tags for empty elements: `<div />` not `<div></div>`
 
-This project follows strict ESLint rules. Always adhere to these standards when writing or modifying code:
+## React Rules
+- No `import React` needed (React 19+)
+- No PropTypes — use JSDoc if type hints are needed
+- Component pattern: `const Foo = () => {}` then `export default Foo` at the bottom (separated)
+- Add `'use client'` when using hooks or browser APIs
 
-### Syntax Rules
-- **No semicolons**: Use `semi: ['error', 'never']` - never add semicolons at the end of statements
-- **Prefer const**: Use `const` for variables that won't be reassigned
-- **No var**: Never use `var`, always use `const` or `let`
-- **Object shorthand**: Use shorthand syntax for object properties when possible
-- **Self-closing tags**: Use self-closing syntax for empty elements (e.g., `<div />` not `<div></div>`)
+## JSX Formatting
+- Multiple props → one per line, tab-indented, closing bracket aligned with opening tag
+- Single prop → inline is fine
 
-### React Rules
-- **No React import needed**: React 19+ doesn't require importing React in JSX files
-- **No prop-types**: PropTypes validation is disabled, use TypeScript or JSDoc if type checking is needed
-- **JSX variables**: Ensure all JSX variables are properly used
-- **Component exports**: Use arrow function with const, then export default at the bottom (separated pattern)
+## Class Name Logic
+- Each conditional class gets its own named `const` — one per line, descriptive name
+- Combine into a final `const` using array `.filter(Boolean).join(' ')`, then pass that to `className`
+- All logic stays in the JS block — the JSX attribute must only reference the final variable, nothing else
+- Do NOT inline arrays, ternaries, or template literals directly in JSX attributes
 
-### JSX Formatting
-- **One prop per line**: When component has multiple props, put each on a new line
-- **Prop indentation**: Use tab indentation for props
-- **Closing bracket**: Align closing bracket with opening tag
-
-### Code Quality
-- **Unused variables**: Prefix unused variables/args with underscore `_` to suppress warnings
-- **Console statements**: Only `console.warn()` and `console.error()` are allowed, avoid `console.log()`
-- **Variants object formatting**: For objects named `variants`, use single line if 3 or fewer properties, multiline if more than 3
-
-### Next.js Rules
-- Follow Next.js recommended rules and core web vitals standards
-- Use Next.js 15+ App Router conventions
-
-## Code Style Examples
-
-### Good ✓
 ```javascript
-const myFunction = () => {
-	const data = { name, age }
-	return data
-}
+// Good ✓
+const borderClass = borders[border]
+const bigClass = big !== undefined ? 'big' : ''
+const paddedClass = padded !== undefined ? 'padded' : ''
+const extraClasses = [borderClass, bigClass, paddedClass, className].filter(Boolean).join(' ')
+const fullClass = `base ${extraClasses}`.trim()
 
-// Arrow function with separated export (preferred)
-const Component = ({ children }) => {
-	const [state, setState] = useState(0)
-	return <div>{children}</div>
-}
+return <div className={fullClass} />
 
-export default Component
+// Bad ✗ — logic inside JSX attribute
+return (
+	<div
+		className={['base', borderClass, bigClass].filter(Boolean).join(' ')}
+	/>
+)
 
-// Multi-line JSX with proper formatting
-const Header = () => {
-	return (
-		<Image
-			src={logo}
-			alt='Logo'
-			width={120}
-			height={40}
-		/>
-	)
-}
-
-export default Header
-
-// Self-closing empty tags
-<div />
-<span />
-
-// Variants object - single line if 3 or fewer properties
-const variants = { primary: 'btn-primary', secondary: 'btn-secondary', danger: 'btn-danger' }
-
-// Variants object - multiline if more than 3 properties
-const variants = {
-	primary: 'btn-primary',
-	secondary: 'btn-secondary',
-	danger: 'btn-danger',
-	success: 'btn-success'
-}
+// Bad ✗ — inlined ternary in JSX
+return <div className={`base ${condition ? 'big' : ''} ${className}`.trim()} />
 ```
 
-### Bad ✗
-```javascript
-var myFunction = () => {
-	const data = { name: name, age: age };
-	return data;
-};
-
-import React from 'react';
-
-// Regular function (avoid this)
-function Component({ children }) {
-	console.log('debug');
-	return <div>{children}</div>;
-}
-
-export default Component
-
-// Combined export (avoid this)
-export default function Component() {
-	return <div />
-}
-
-// Non-self-closing empty tags
-<div></div>
-<span></span>
-```
+## Code Quality
+- Unused vars/args → prefix with `_`
+- Only `console.warn()` and `console.error()` — no `console.log()`
+- `variants` object: single line if ≤3 properties, multiline if >3
 
 ## File Organization
-- Use App Router structure: `app/` directory for pages and layouts
-- Redux slices: `lib/features/[feature-name]/[feature-name]Slice.js`
-- Shared utilities: `lib/` directory
-- Client components: Add `'use client'` directive when using hooks or browser APIs
-- Components: `components/` directory with `ui/`, `layout/`, and `features/` subdirectories
+```
+app/                        # App Router pages and layouts
+components/ui/              # Reusable UI primitives
+components/layout/          # Layout components
+components/features/        # Feature-specific components
+lib/features/[name]/        # Redux slices ([name]Slice.js)
+lib/                        # Store, hooks, shared utilities
+assets/css/                 # Global styles, Tailwind theme
+public/                     # Static assets
+```
 
-## When Writing Code
-1. Never add semicolons
-2. Use const by default, let only when reassignment is needed
-3. Use object shorthand syntax
-4. Avoid console.log, use console.warn or console.error if needed
-5. Don't import React in component files
-6. Prefix unused parameters with underscore
-7. Use arrow function with const, export default at the bottom (separated pattern)
-8. Use self-closing tags for empty elements
-9. Format multi-prop JSX with one prop per line
+## Before Making Changes
+- Always read the file first — never assume current state
+- Never revert user's manual edits (commented code, removed props, custom styles)
+- Check related files for full context before modifying
 
-## CRITICAL: Before Making Changes
-**ALWAYS read the current file content first using readFile or readMultipleFiles before making any changes!**
-- Never assume what the code looks like
-- Always check current state before modifying
-- User may have made manual changes that must be preserved
-- Scan all related files to understand the full context
-- **NEVER revert user's manual edits** - if user comments out code or removes properties, DO NOT add them back
-- **NEVER overwrite user's custom animations or styles** - preserve all user customizations
-- If user explicitly states they made a change, respect that change completely
+## Examples
+
+```javascript
+// Good ✓
+const MyComponent = ({ children, className = '' }) => {
+	const extraClasses = [className].filter(Boolean).join(' ')
+	const fullClass = `rnd-base ${extraClasses}`.trim()
+	return <div className={fullClass}>{children}</div>
+}
+
+export default MyComponent
+
+// Bad ✗
+import React from 'react'
+
+export default function MyComponent({ children, className = '' }) {
+	return <div className={`rnd-base ${className}`.trim()}>{children}</div>;
+}
+```
+
+## Documentation (JSDoc)
+
+All components, utility functions, and non-obvious logic must have JSDoc comments.
+
+### Components
+- `@param {object} props` — always document the props object
+- Each prop on its own `@param` line with type and description
+- `@returns {JSX.Element}`
+- Use `@typedef` for reusable prop shapes or union types
+
+```javascript
+/**
+ * Brief description of what the component renders.
+ *
+ * @param {object} props
+ * @param {React.ReactNode} props.children - Content inside the component
+ * @param {'dark' | 'red'} [props.variant='dark'] - Visual variant
+ * @param {string} [props.className=''] - Additional CSS classes
+ * @returns {JSX.Element}
+ */
+const MyComponent = ({ children, variant = 'dark', className = '' }) => {
+	// ...
+}
+
+export default MyComponent
+```
+
+### Functions
+- One-line summary on the first line
+- `@param` for every argument with type and description
+- `@returns` with type and description
+
+```javascript
+/**
+ * Calculates age in years from a date of birth string.
+ *
+ * @param {string} dob - Date of birth in `YYYY-MM-DD` format
+ * @returns {number} Age in full years
+ */
+const getAge = (dob) => {
+	const ageDate = new Date(Date.now() - new Date(dob).getTime())
+	return ageDate.getUTCFullYear() - 1970
+}
+```
+
+### Typedefs
+Use `@typedef` for shared types (union strings, object shapes) defined at the top of the file.
+
+```javascript
+/**
+ * @typedef {'default' | 'dark' | 'red' | 'orange'} BorderVariant
+ */
+
+/** @type {Record<BorderVariant, string>} */
+const borders = { default: '', dark: 'border-dark', red: 'border-red', orange: 'border-orange' }
+```
+
+### Inline Comments
+- Use inline comments for non-obvious logic, not for self-explanatory code
+- Keep them short and factual
+
+```javascript
+// Destroy Typed instance on unmount to prevent memory leaks
+return () => typed.destroy()
+```

@@ -4,6 +4,10 @@ import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import Typed from 'typed.js'
 
+/**
+ * Rotating developer role strings displayed in the typing animation.
+ * @type {string[]}
+ */
 const typedArray = [
 	'Fullstack',
 	'React',
@@ -12,7 +16,15 @@ const typedArray = [
 	'Spring'
 ]
 
+/**
+ * Brief intro slide — the first section of the portfolio.
+ * Displays a profile photo and an animated typing effect
+ * cycling through developer roles using Typed.js.
+ *
+ * @returns {JSX.Element}
+ */
 const Brief = () => {
+	/** @type {React.RefObject<HTMLSpanElement>} */
 	const typedRef = useRef()
 
 	useEffect(() => {
@@ -24,10 +36,8 @@ const Brief = () => {
 			loop: true
 		})
 
-		return () => {
-			// Destroy Typed instance during cleanup to stop animation
-			typed.destroy()
-		}
+		// Destroy Typed instance on unmount to prevent memory leaks
+		return () => typed.destroy()
 	}, [])
 
 	return (

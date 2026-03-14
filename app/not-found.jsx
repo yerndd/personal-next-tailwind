@@ -5,6 +5,12 @@ export const metadata = {
 	description: 'The page you are looking for does not exist'
 }
 
+/**
+ * Custom 404 page rendered by Next.js when a route is not found.
+ * Displays an error message and a link back to the home page.
+ *
+ * @returns {JSX.Element}
+ */
 const NotFound = () => {
 	return (
 		<div className="flex min-h-screen flex-col items-center justify-center px-4">

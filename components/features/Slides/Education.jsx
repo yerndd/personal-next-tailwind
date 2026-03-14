@@ -1,6 +1,11 @@
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 
+/**
+ * Education slide — displays education history and qualifications.
+ *
+ * @returns {JSX.Element}
+ */
 const Education = () => {
 	return (
 		<Container id="education" className="flex" big padded>

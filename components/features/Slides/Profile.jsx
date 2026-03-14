@@ -1,11 +1,26 @@
 import Container from '@/components/ui/Container'
 import SeeResumeButton from '../Customs/SeeResumeButton'
 
+/**
+ * Calculates the current age from a date of birth string.
+ *
+ * @param {string} dob - Date of birth in `YYYY-MM-DD` format
+ * @returns {number} Current age in years
+ */
+const getAge = (dob) => {
+	const ageDate = new Date(Date.now() - new Date(dob).getTime())
+	return ageDate.getUTCFullYear() - 1970
+}
+
+/**
+ * Profile slide section.
+ * Displays personal info including name, role, bio, and contact details.
+ * Also renders the resume download button.
+ *
+ * @returns {JSX.Element}
+ */
 const Profile = () => {
-	const dob = new Date('2000-11-08')
-	const ageDifMs = Date.now() - dob.getTime()
-	const ageDate = new Date(ageDifMs)
-	const age = ageDate.getUTCFullYear() - 1970
+	const age = getAge('2000-11-08')
 
 	return (
 		<Container id="profile" className="flex" big padded>

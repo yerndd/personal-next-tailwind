@@ -2,6 +2,12 @@ import '@/assets/css/index.css'
 import StoreProvider from '@/lib/StoreProvider'
 import Preload from '@/components/layout/Preload'
 
+/**
+ * Next.js site-wide metadata.
+ * Includes SEO, Open Graph, Twitter card, and icon configuration.
+ *
+ * @type {import('next').Metadata}
+ */
 export const metadata = {
 	metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
 	title: {
@@ -82,6 +88,12 @@ export const metadata = {
 	other: { 'Cache-Control': 'no-cache' }
 }
 
+/**
+ * Next.js viewport configuration.
+ * Controls responsive scaling and browser theme color.
+ *
+ * @type {import('next').Viewport}
+ */
 export const viewport = {
 	width: 'device-width',
 	initialScale: 1,
@@ -89,6 +101,14 @@ export const viewport = {
 	themeColor: '#ffffff'
 }
 
+/**
+ * Root layout wrapping every page in the app.
+ * Provides the Redux store and renders the preload screen.
+ *
+ * @param {object} props
+ * @param {React.ReactNode} props.children - Page content
+ * @returns {JSX.Element}
+ */
 const RootLayout = ({ children }) => {
 	return (
 		<html lang="en">
@@ -103,4 +123,3 @@ const RootLayout = ({ children }) => {
 }
 
 export default RootLayout
-
