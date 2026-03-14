@@ -1,7 +1,7 @@
 export const dynamic = 'force-static'
 
 export default function sitemap() {
-	const baseUrl = 'https://your-domain.com'
+	const baseUrl = 'https://rnd-app.com'
 
 	return [
 		{
