@@ -4,135 +4,279 @@ inclusion: always
 
 # Project Coding Standards
 
-## ESLint Configuration Rules
+Stack: Next.js 15+ / React 19, App Router, Redux Toolkit, Tailwind CSS. JavaScript only — no TypeScript.
 
-This project follows strict ESLint rules. Always adhere to these standards when writing or modifying code:
+All rules below are hard constraints. ESLint enforces formatting — treat violations as errors. Apply these to every file you read or write.
 
-### Syntax Rules
-- **No semicolons**: Use `semi: ['error', 'never']` - never add semicolons at the end of statements
-- **Prefer const**: Use `const` for variables that won't be reassigned
-- **No var**: Never use `var`, always use `const` or `let`
-- **Object shorthand**: Use shorthand syntax for object properties when possible
-- **Self-closing tags**: Use self-closing syntax for empty elements (e.g., `<div />` not `<div></div>`)
+---
 
-### React Rules
-- **No React import needed**: React 19+ doesn't require importing React in JSX files
-- **No prop-types**: PropTypes validation is disabled, use TypeScript or JSDoc if type checking is needed
-- **JSX variables**: Ensure all JSX variables are properly used
-- **Component exports**: Use arrow function with const, then export default at the bottom (separated pattern)
+## Syntax Rules
 
-### JSX Formatting
-- **One prop per line**: When component has multiple props, put each on a new line
-- **Prop indentation**: Use tab indentation for props
-- **Closing bracket**: Align closing bracket with opening tag
+- No semicolons
+- `const` by default; `let` only when reassignment is needed; never `var`
+- Object shorthand: `{ name }` not `{ name: name }`
+- No trailing commas
+- Self-closing JSX for childless elements: `<Foo />` not `<Foo></Foo>`
+- Boolean props: omit `={true}` — `<Foo disabled />` not `<Foo disabled={true} />`
+- JS strings: single quotes; JSX attribute values: double quotes
+- Tabs for indentation (JS and JSX props)
+- Spaces inside object curly braces: `{ key: value }`
 
-### Code Quality
-- **Unused variables**: Prefix unused variables/args with underscore `_` to suppress warnings
-- **Console statements**: Only `console.warn()` and `console.error()` are allowed, avoid `console.log()`
-- **Variants object formatting**: For objects named `variants`, use single line if 3 or fewer properties, multiline if more than 3
+## Objects & Arrays
 
-### Next.js Rules
-- Follow Next.js recommended rules and core web vitals standards
-- Use Next.js 15+ App Router conventions
+- 1–2 entries → inline; 3+ entries → multiline, one entry per line
 
-## Code Style Examples
-
-### Good ✓
 ```javascript
-const myFunction = () => {
-	const data = { name, age }
-	return data
-}
+const point = { x: 1, y: 2 }          // inline ok
 
-// Arrow function with separated export (preferred)
-const Component = ({ children }) => {
-	const [state, setState] = useState(0)
-	return <div>{children}</div>
-}
-
-export default Component
-
-// Multi-line JSX with proper formatting
-const Header = () => {
-	return (
-		<Image
-			src={logo}
-			alt='Logo'
-			width={120}
-			height={40}
-		/>
-	)
-}
-
-export default Header
-
-// Self-closing empty tags
-<div />
-<span />
-
-// Variants object - single line if 3 or fewer properties
-const variants = { primary: 'btn-primary', secondary: 'btn-secondary', danger: 'btn-danger' }
-
-// Variants object - multiline if more than 3 properties
-const variants = {
-	primary: 'btn-primary',
-	secondary: 'btn-secondary',
-	danger: 'btn-danger',
-	success: 'btn-success'
+const config = {                        // multiline required
+	name: 'foo',
+	value: 42,
+	active: true
 }
 ```
 
-### Bad ✗
+---
+
+## React
+
+- Never `import React` — not needed in React 19+
+- No PropTypes — use JSDoc instead (see JSDoc section)
+- `'use client'` must be the very first line (before all imports) in any file using hooks or browser APIs
+- Components must be `const` arrow functions; `export default` is always a separate statement at the bottom
+- Spread unknown props onto the root element: `{ children, className = '', ...props }`
+- Define named handler functions in the component body — no inline arrow functions in JSX
+
 ```javascript
-var myFunction = () => {
-	const data = { name: name, age: age };
-	return data;
-};
+// Correct
+const handleClick = () => window.open('/resume.pdf', '_blank')
+return <button onClick={handleClick}>Open</button>
 
-import React from 'react';
-
-// Regular function (avoid this)
-function Component({ children }) {
-	console.log('debug');
-	return <div>{children}</div>;
-}
-
-export default Component
-
-// Combined export (avoid this)
-export default function Component() {
-	return <div />
-}
-
-// Non-self-closing empty tags
-<div></div>
-<span></span>
+// Wrong
+return <button onClick={() => window.open('/resume.pdf', '_blank')}>Open</button>
 ```
 
-## File Organization
-- Use App Router structure: `app/` directory for pages and layouts
-- Redux slices: `lib/features/[feature-name]/[feature-name]Slice.js`
-- Shared utilities: `lib/` directory
-- Client components: Add `'use client'` directive when using hooks or browser APIs
-- Components: `components/` directory with `ui/`, `layout/`, and `features/` subdirectories
+```javascript
+// Correct
+const MyComponent = ({ children, className = '', ...props }) => {
+	return <div className={className} {...props}>{children}</div>
+}
+export default MyComponent
 
-## When Writing Code
-1. Never add semicolons
-2. Use const by default, let only when reassignment is needed
-3. Use object shorthand syntax
-4. Avoid console.log, use console.warn or console.error if needed
-5. Don't import React in component files
-6. Prefix unused parameters with underscore
-7. Use arrow function with const, export default at the bottom (separated pattern)
-8. Use self-closing tags for empty elements
-9. Format multi-prop JSX with one prop per line
+// Wrong
+export default function MyComponent({ children }) { ... }
+```
 
-## CRITICAL: Before Making Changes
-**ALWAYS read the current file content first using readFile or readMultipleFiles before making any changes!**
-- Never assume what the code looks like
-- Always check current state before modifying
-- User may have made manual changes that must be preserved
-- Scan all related files to understand the full context
-- **NEVER revert user's manual edits** - if user comments out code or removes properties, DO NOT add them back
-- **NEVER overwrite user's custom animations or styles** - preserve all user customizations
-- If user explicitly states they made a change, respect that change completely
+## Next.js
+
+- Server Components are the default — only add `'use client'` when actually needed
+- Fetch data in Server Components; pass down as props to Client Components
+- `next/image` for all images — never raw `<img>`; always provide `width`/`height` or `fill`
+- `next/link` for all internal navigation — never raw `<a>` for internal routes
+- Export `metadata` and `viewport` from layout/page files — never use `<head>` tags directly
+- `export const dynamic = 'force-static'` on always-static routes (sitemap, manifest)
+- `output: 'export'` preferred for static/portfolio sites
+- Browser env vars must be prefixed with `NEXT_PUBLIC_`
+- Add `priority` to above-the-fold images to improve LCP
+
+## Redux
+
+- Always use `useAppDispatch` and `useAppSelector` from `lib/hooks.js` — never raw hooks
+- Keep slice state minimal and flat
+- Async logic belongs in thunks or RTK Query — not in components
+- Slice files: `lib/features/[name]/[name]Slice.js`
+
+---
+
+## Import Order
+
+Separated by blank lines, in this order:
+
+1. `'use client'` directive (if needed)
+2. External packages
+3. Internal aliases (`@/components/...`, `@/lib/...`)
+4. Relative imports
+
+```javascript
+'use client'
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
+
+import Container from '@/components/ui/Container'
+
+import SomeHelper from '../utils/helper'
+```
+
+## JSX Formatting
+
+- Single prop → inline: `<Foo bar="baz" />`
+- Multiple props → one per line, tab-indented; closing `>` or `/>` on its own line aligned with the opening tag
+
+```jsx
+<Foo
+	bar="baz"
+	qux="quux"
+/>
+```
+
+---
+
+## className Logic
+
+Never put class logic inside a JSX `className` attribute. All logic goes in the JS block above `return`.
+
+```javascript
+// Correct
+const variantClass = variants[variant]
+const bigClass = big !== undefined ? 'big' : ''
+const fullClass = ['rnd-base', variantClass, bigClass, className].filter(Boolean).join(' ')
+return <div className={fullClass} />
+
+// Wrong — logic inside JSX
+return <div className={['rnd-base', variantClass].filter(Boolean).join(' ')} />
+return <div className={`rnd-base ${condition ? 'big' : ''}`} />
+```
+
+---
+
+## Performance
+
+- Push `'use client'` as deep in the tree as possible — maximize Server Component surface area
+- Never define components inside another component — define at module scope
+- Module-level constants (lookup objects, static arrays, config) must live outside the component
+
+```javascript
+// Wrong — recreated every render
+const MyComponent = () => {
+	const options = { behavior: 'smooth', block: 'start' }
+}
+
+// Correct — module scope
+const SCROLL_OPTIONS = { behavior: 'smooth', block: 'start' }
+const MyComponent = () => { ... }
+```
+
+- Avoid unnecessary state — derive values from existing state/props when possible
+- `useMemo`/`useCallback` only when recomputation cost is measurable or value is a referential dep of another hook
+- `next/image` with explicit dimensions or `fill` to prevent CLS
+- `priority` on above-the-fold images
+
+---
+
+## Readability & Naming
+
+- Booleans as questions: `isActive`, `hasError`, `isLoading`
+- Event handlers with `handle` prefix: `handleClick`, `handleSubmit`
+- Derived class variables named descriptively: `variantClass`, `activeClass`, `fullClass`
+- Extract complex conditions into named variables before JSX
+- All logic above `return` — JSX block is rendering only
+
+```javascript
+// Wrong
+return <div className={isActive && !isDisabled ? 'active' : 'inactive'} />
+
+// Correct
+const isVisible = isActive && !isDisabled
+const stateClass = isVisible ? 'active' : 'inactive'
+return <div className={stateClass} />
+```
+
+---
+
+## Modularity & Architecture
+
+| Layer | Path | Rule |
+|---|---|---|
+| UI primitives | `components/ui/` | Generic, reusable — no hardcoded content or feature logic |
+| Feature components | `components/features/` | Own data logic, consume UI primitives |
+| Layout components | `components/layout/` | Structural only — no business logic |
+| Redux slices | `lib/features/[name]/` | `[name]Slice.js` |
+| Utilities | `lib/` | Pure functions, store, hooks, shared constants |
+| Styles | `assets/css/` | Global styles, Tailwind theme variables |
+| Static assets | `public/` | Images, fonts, resume PDF |
+
+- One exported component per file; co-locate helpers only if exclusively used by that component
+- ~150 lines is a signal to split a component
+- Shared constants used across files belong in `lib/` — not duplicated per file
+- Extract pure utility functions to `lib/` for reuse and testability
+
+---
+
+## Code Quality
+
+- Prefix unused variables/arguments with `_`
+- `console.warn()` and `console.error()` only — never `console.log()`
+- No magic numbers or strings — extract as named constants
+- Never mutate props or external state — always derive new values
+
+---
+
+## Before Making Changes
+
+- Always read the target file before editing — never assume its current state
+- Check related files for full context (CSS, sibling components, Redux slice)
+- Never revert the user's manual edits: commented-out code, removed props, custom styles
+
+---
+
+## JSDoc
+
+Required for all components, utility functions, and non-obvious logic.
+
+### Components
+
+```javascript
+/**
+ * Brief description of what the component renders.
+ *
+ * @param {object} props
+ * @param {React.ReactNode} props.children - Content inside the component
+ * @param {'dark' | 'red'} [props.variant='dark'] - Visual variant
+ * @param {string} [props.className=''] - Additional CSS classes
+ * @returns {JSX.Element}
+ */
+const MyComponent = ({ children, variant = 'dark', className = '' }) => {
+	// ...
+}
+export default MyComponent
+```
+
+- `@param {object} props` always first; one `@param` per prop with type and description
+- Always include `@returns {JSX.Element}`
+- Use `@typedef` for reusable union types, defined at the top of the file before the lookup object
+
+### Functions
+
+```javascript
+/**
+ * Calculates age in years from a date of birth string.
+ *
+ * @param {string} dob - Date of birth in `YYYY-MM-DD` format
+ * @returns {number} Age in full years
+ */
+const getAge = (dob) => {
+	const ageDate = new Date(Date.now() - new Date(dob).getTime())
+	return ageDate.getUTCFullYear() - 1970
+}
+```
+
+### Typedefs
+
+```javascript
+/**
+ * @typedef {'default' | 'dark' | 'red' | 'orange'} BorderVariant
+ */
+
+/** @type {Record<BorderVariant, string>} */
+const borders = {
+	default: '',
+	dark: 'border-dark',
+	red: 'border-red',
+	orange: 'border-orange'
+}
+```
+
+### Inline Comments
+
+- Only for non-obvious logic — skip self-explanatory code
+- Short and factual: `// Destroy Typed instance on unmount to prevent memory leaks`

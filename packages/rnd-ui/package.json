@@ -1,0 +1,54 @@
+{
+    "name": "rnd-ui",
+    "version": "0.1.0",
+    "description": "RND UI component library — Button, Container, and base styles",
+    "author": "Rindho Ananta Samat",
+    "license": "ISC",
+    "keywords": [
+        "react",
+        "ui",
+        "components",
+        "tailwind",
+        "rnd"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/yerndd/personal-next-tailwind.git",
+        "directory": "packages/rnd-ui"
+    },
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        },
+        "./styles": "./dist/styles.css",
+        "./fonts/*": "./dist/fonts/*"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsup",
+        "build:css": "node scripts/build-css.mjs",
+        "build:all": "npm run build && npm run build:css",
+        "dev": "tsup --watch",
+        "lint": "eslint src",
+        "lint:fix": "eslint src --fix"
+    },
+    "peerDependencies": {
+        "react": ">=19",
+        "react-dom": ">=19"
+    },
+    "devDependencies": {
+        "eslint": "^9.39.3",
+        "eslint-plugin-react": "^7.37.5",
+        "globals": "^17.3.0",
+        "tsup": "^8.5.0",
+        "postcss": "^8.5.6",
+        "postcss-import": "^16.1.0",
+        "autoprefixer": "^10.4.24",
+        "cssnano": "^7.1.2"
+    }
+}

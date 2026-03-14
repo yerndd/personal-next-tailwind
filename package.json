@@ -1,51 +1,20 @@
 {
-  "name": "personal-next-tailwind",
-  "version": "0.0.3",
-  "description": "Personal Web for Profile",
+  "name": "rnd-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "RND monorepo — rnd-ui package + portfolio app",
   "author": "Rindho Ananta Samat",
   "license": "ISC",
-  "keywords": [
-    "personal",
-    "next",
-    "tailwind"
+  "workspaces": [
+    "packages/*",
+    "apps/*"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yerndd/personal-next-tailwind.git"
-  },
-  "bugs": {
-    "url": "https://github.com/yerndd/personal-next-tailwind/issues"
-  },
-  "homepage": "https://github.com/yerndd/personal-next-tailwind#readme",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix"
-  },
-  "dependencies": {
-    "@reduxjs/toolkit": "^2.11.2",
-    "@tailwindcss/postcss": "^4.1.13",
-    "autoprefixer": "^10.4.24",
-    "cssnano": "^7.1.2",
-    "next": "^16.1.6",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-redux": "^9.2.0",
-    "tailwindcss": "^4.1.13",
-    "typed.js": "^3.0.0"
-  },
-  "devDependencies": {
-    "eslint": "^9.39.3",
-    "eslint-config-next": "^16.1.6",
-    "eslint-config-xo": "^0.49.0",
-    "eslint-plugin-react": "^7.37.5",
-    "globals": "^17.3.0",
-    "minimatch": "^10.2.2"
-  },
-  "overrides": {
-    "minimatch": "^10.2.2",
-    "zlib": "^1.0.8"
+    "dev": "npm -w portfolio run dev",
+    "build": "npm -w rnd-ui run build:all && npm -w portfolio run build",
+    "build:ui": "npm -w rnd-ui run build:all",
+    "build:portfolio": "npm -w portfolio run build",
+    "lint": "npm -ws run lint",
+    "lint:fix": "npm -ws run lint:fix"
   }
 }
