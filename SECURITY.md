@@ -1,99 +1,44 @@
 # Security Policy
 
+## Scope
+
+This policy covers both packages in this monorepo:
+
+- `rnd-ui` — published npm component library (`packages/rnd-ui`)
+- `portfolio` — personal portfolio site (`apps/portfolio`)
+
 ## Supported Versions
 
-This project is a personal portfolio website. Security updates are applied to the latest version only.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| Latest  | :white_check_mark: |
-| Older   | :x:                |
+Security updates are applied to the latest version only. No legacy versions are maintained.
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in this project, please report it responsibly.
+Please report responsibly. Do not open a public issue.
 
-### How to Report
+- Email: rindo.ananta@gmail.com
+- GitHub: [Private vulnerability reporting](../../security/advisories/new)
 
-1. **Do NOT** open a public issue
-2. Email: [rindo.ananta@gmail.com] (replace with your email)
-3. Or use GitHub's private vulnerability reporting:
-   - Go to the Security tab
-   - Click "Report a vulnerability"
+Include a description, steps to reproduce, potential impact, and a suggested fix if you have one.
 
-### What to Include
-
-- Description of the vulnerability
-- Steps to reproduce
-- Potential impact
-- Suggested fix (if any)
-
-### Response Time
-
-- **Initial response**: Within 48 hours
-- **Status update**: Within 7 days
-- **Fix timeline**: Depends on severity
+Response times: initial reply within 48 hours, status update within 7 days. Fix timeline depends on severity.
 
 ## Security Measures
 
-This project implements the following security practices:
+- Static site export — no server, no database, minimal attack surface
+- HTTPS enforced via GitHub Pages
+- No user data collected or stored
+- ESLint + Trivy scanning on every push via GitHub Actions
+- Secrets managed via GitHub Actions secrets — never committed to the repo
+- Regular `npm audit` and dependency updates
 
-### Code Security
-- ESLint for code quality and security checks
-- No sensitive data in repository
-- Dependencies regularly updated
-- Automated security scanning via GitHub Actions
+## For Contributors
 
-### Deployment Security
-- Static site generation (no server-side vulnerabilities)
-- HTTPS enforced via Cloudflare/GitHub Pages
-- Content Security Policy headers
-- No user data collection or storage
+Never commit API keys, tokens, credentials, or personal information. Run `npm audit` before opening a PR and keep dependencies up to date.
 
-### Dependencies
-- Regular dependency audits via `npm audit`
-- Automated dependency updates
-- Minimal dependencies to reduce attack surface
+## Disclosure
 
-## Known Limitations
-
-As a static website:
-- No backend vulnerabilities
-- No database security concerns
-- No user authentication required
-- Limited attack surface
-
-## Security Best Practices for Contributors
-
-If you contribute to this project:
-
-1. **Never commit**:
-   - API keys or secrets
-   - Personal information
-   - Credentials or tokens
-
-2. **Always**:
-   - Run `npm audit` before submitting PRs
-   - Keep dependencies up to date
-   - Follow secure coding practices
-   - Test changes locally first
-
-3. **Code Review**:
-   - All PRs require review
-   - Security-sensitive changes need extra scrutiny
-
-## Disclosure Policy
-
-- Security issues are fixed privately
-- Public disclosure after fix is deployed
-- Credit given to reporters (if desired)
-
-## Contact
-
-For security concerns, contact:
-- Email: [rindo.ananta@gmail.com]
-- GitHub: [@yerndd](https://github.com/yerndd)
+Issues are fixed privately. Public disclosure happens after the fix is deployed. Reporter credit given on request.
 
 ---
 
-**Last Updated**: March 2026
+Last updated: March 2026
