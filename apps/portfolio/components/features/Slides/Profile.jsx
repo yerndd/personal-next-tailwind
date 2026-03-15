@@ -40,7 +40,9 @@ const Profile = () => {
 					className="px-3 py-2 mb-2"
 				>
 					<div className="text-2xl">
-						Rindho Ananta Samat
+						<span className="font-bold">R</span>indho{' '}
+						<span className="font-bold">A</span>nanta{' '}
+						<span className="font-bold">S</span>amat{' '}
 						<span className="text-red-dark">(He/Him)</span>
 					</div>
 					<div className="text-orange-dark">Fullstack Web Developer</div>
@@ -63,14 +65,14 @@ const Profile = () => {
 					<div className="w-2/3">November 8<sup>th</sup> 2000 ({age} y.o)</div>
 				</Container>
 				<Container
-					border="red"
+					border="blue"
 					className="px-3 py-2 mb-2 flex"
 				>
 					<div className="w-1/3">Location</div>
 					<div className="w-2/3">West Jakarta, Jakarta, Indonesia</div>
 				</Container>
 				<Container
-					border="blue"
+					border="red"
 					className="px-3 py-2 mb-2 flex"
 				>
 					<div className="w-1/3">Phone</div>

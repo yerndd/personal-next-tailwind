@@ -62,7 +62,12 @@ const Brief = () => {
 			</div>
 			<div className="w-2/3">
 				<p className="text-dark-primary text-[20pt]">i am,</p>
-				<p className="text-red-dark text-[36pt]">Rindho Ananta<br />Samat</p>
+				<p className="text-red-dark text-[36pt]">
+					<span className="font-bold">R</span>indho{' '}
+					<span className="font-bold">A</span>nanta
+					<br />
+					<span className="font-bold">S</span>amat
+				</p>
 				<p className="text-dark-primary text-[36pt]">
 					<span className="font-bold" ref={typedRef} /> Developer
 				</p>
