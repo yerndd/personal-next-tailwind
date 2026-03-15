@@ -30,6 +30,34 @@
     }
 }
 
+@keyframes bg-big {
+    0% {
+        top: 0;
+    }
+
+    50% {
+        top: -65%;
+    }
+
+    100% {
+        top: -135%;
+    }
+}
+
+@keyframes bg-small {
+    0% {
+        top: -0%;
+    }
+
+    50% {
+        top: -200%;
+    }
+
+    100% {
+        top: -400%;
+    }
+}
+
 #preload {
     position: fixed;
     z-index: 100;
@@ -79,4 +107,157 @@
     object-position: center bottom;
     animation: profile-image auto linear forwards;
     animation-timeline: scroll();
+}
+
+#background-big {
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+    animation: bg-big auto linear forwards;
+    animation-timeline: scroll();
+
+    img {
+        position: absolute;
+        height: auto;
+    }
+
+    #big-1 {
+        top: 10dvh;
+        left: 35%;
+        width: 9%;
+    }
+
+    #big-2 {
+        top: 72dvh;
+        left: 87%;
+        width: 8%;
+    }
+
+    #big-3 {
+        top: 138dvh;
+        left: 6%;
+        width: 9%;
+    }
+
+    #big-4 {
+        top: 220dvh;
+        left: 60%;
+        width: 10%;
+    }
+}
+
+#background-small {
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 98;
+    animation: bg-small auto linear forwards;
+    animation-timeline: scroll();
+
+    div {
+        position: absolute;
+        height: 45px;
+        width: 45px;
+        content: '';
+    }
+
+    .red {
+        background-color: var(--color-red-dark);
+    }
+
+    .orange {
+        background-color: var(--color-orange-dark);
+    }
+
+    .green {
+        background-color: var(--color-green-dark);
+    }
+
+    .blue {
+        background-color: var(--color-blue-dark);
+    }
+
+    .dark {
+        background-color: var(--color-dark-primary);
+    }
+
+    .light {
+        background-color: var(--color-light-primary);
+    }
+
+    #small-1 {
+        top: 10dvh;
+        left: 70%;
+    }
+
+    #small-2 {
+        top: 45dvh;
+        left: 95%;
+    }
+
+    #small-3 {
+        top: 55dvh;
+        left: 16%;
+    }
+
+    #small-4 {
+        top: 75dvh;
+        left: 50%;
+    }
+
+    #small-5 {
+        top: 88dvh;
+        left: 6%;
+    }
+
+    #small-6 {
+        top: 110dvh;
+        left: 70%;
+    }
+
+    #small-7 {
+        top: 120dvh;
+        left: 35%;
+    }
+
+    #small-8 {
+        top: 140dvh;
+        left: 95%;
+    }
+
+    #small-9 {
+        top: 165dvh;
+        left: 40%;
+    }
+
+    #small-10 {
+        top: 185dvh;
+        left: 60%;
+    }
+
+    #small-11 {
+        top: 210dvh;
+        left: 12%;
+    }
+
+    #small-12 {
+        top: 250dvh;
+        left: 84%;
+    }
+
+    #small-13 {
+        top: 270dvh;
+        left: 28%;
+    }
+
+    #small-14 {
+        top: 280dvh;
+        left: 55%;
+    }
+
+    #small-15 {
+        top: 290dvh;
+        left: 90%;
+    }
 }

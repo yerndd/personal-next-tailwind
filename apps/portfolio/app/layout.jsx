@@ -2,6 +2,7 @@ import 'rnd-ui/styles'
 import '@/assets/css/index.css'
 import StoreProvider from '@/lib/StoreProvider'
 import Preload from '@/components/layout/Preload'
+import Background from '@/components/layout/Background'
 
 /**
  * Next.js site-wide metadata.
@@ -112,6 +113,7 @@ const RootLayout = ({ children }) => {
 		<html lang="en">
 			<body suppressHydrationWarning>
 				<StoreProvider>
+					<Background />
 					{children}
 					<Preload />
 				</StoreProvider>
