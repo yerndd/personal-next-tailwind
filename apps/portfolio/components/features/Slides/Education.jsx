@@ -1,4 +1,4 @@
-import { Button, Container } from 'rnd-ui'
+import { Container } from 'rnd-ui'
 
 /**
  * Education slide — displays education history and qualifications.
