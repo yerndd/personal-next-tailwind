@@ -11,12 +11,14 @@
   ],
   "scripts": {
     "dev": "run-s build:ui dev:all",
-    "dev:all": "run-p dev:ui dev:app",
-    "dev:app": "npm -w portfolio run dev",
+    "dev:all": "run-p dev:ui dev:portfolio dev:elis",
+    "dev:portfolio": "npm -w portfolio run dev",
+    "dev:elis": "npm -w elis run dev",
     "dev:ui": "npm -w rnd-ui run dev",
-    "build": "run-s build:ui build:portfolio",
+    "build": "run-s build:ui build:portfolio build:elis",
     "build:ui": "npm -w rnd-ui run build:all",
     "build:portfolio": "npm -w portfolio run build",
+    "build:elis": "npm -w elis run build",
     "lint": "npm -ws run lint",
     "lint:fix": "npm -ws run lint:fix"
   },

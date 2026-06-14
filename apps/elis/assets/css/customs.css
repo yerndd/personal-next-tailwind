@@ -1,0 +1,184 @@
+/* Component-specific styles */
+
+/* ── Stage wrapper ── */
+.el-stage {
+    position: relative;
+    min-height: 100dvh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* ── Stage variant: content pushed to top/bottom instead of centered ── */
+.el-stage--top {
+    justify-content: space-between;
+    padding: 3.5rem 1.5rem 3rem;
+}
+
+/* ── Caption variant: sits at the top ── */
+.el-caption--top {
+    margin-top: 0;
+}
+
+/* ── Bottom-anchored block ── */
+.el-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+/* ── Centered image block ── */
+.el-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Caption text below the image ── */
+.el-caption {
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
+    text-align: center;
+    color: #1a1a1a;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* ── Clickable image button ── */
+.el-img-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Shared image base ── */
+.el-img {
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* ── Image hover bounce ── */
+.el-img--hover {
+    transition: transform 0.2s ease;
+}
+
+.el-img--hover:hover {
+    transform: scale(1.06);
+}
+
+/* ── Modal overlay ── */
+.el-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 100;
+    padding: 2rem 0;
+    overflow-y: auto;
+}
+
+/* Dark variant — dims the stage behind it */
+.el-modal-overlay--dark {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: none;
+}
+
+/* ── White card behind the modal image ── */
+.el-modal-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+/* Larger variant with more breathing room */
+.el-modal-card--large {
+    padding: 3rem 3.5rem;
+    width: 80vw;
+    gap: 1.25rem;
+    overflow: visible;
+}
+
+/* Caption inside modal at the top — no bottom margin */
+.el-caption--modal-top {
+    margin-bottom: 0;
+}
+
+/* Smooth size transition on the object-6 image */
+.el-img--transition {
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+/* Long text block — spaced paragraphs */
+.el-modal-long-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* Tighter captions inside the long text block */
+.el-modal-long-text .el-caption {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+/* ── Large modal frame — nearly full screen with white bg ── */
+.el-modal-frame {
+    position: relative;
+    width: min(88vw, 640px);
+    aspect-ratio: 4 / 3;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.el-modal-img {
+    object-fit: contain;
+    padding: 1.5rem;
+}
+
+/* ── Crawling image container — sits at bottom, scrolls right→left in a loop ── */
+.el-crawler {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.el-crawler-img {
+    object-fit: contain;
+    display: block;
+    /* start off the right edge, translate to off the left edge */
+    animation: crawl-left 8s linear infinite;
+}
+
+@keyframes crawl-left {
+    from {
+        transform: translateX(100vw);
+    }
+
+    to {
+        transform: translateX(-200px);
+    }
+}

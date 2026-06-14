@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://elis.rnd-app.com/sitemap.xml
